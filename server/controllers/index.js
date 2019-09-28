@@ -1,24 +1,25 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+
 mongoose.connect('mongodb://localhost/test');
 
-var db = mongoose.connection;
+const db = mongoose.connection;
 
-db.on('error', function() {
+db.on('error', () => {
   console.log('mongoose connection error');
 });
 
-db.once('open', function() {
+db.once('open', () => {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
+const bookSchema = mongoose.Schema({
   quantity: Number,
-  description: String
+  description: String,
 });
 
-var Item = mongoose.model('Item', itemSchema);
+const Item = mongoose.model('Item', bookSchema);
 
-var selectAll = function(callback) {
+let selectAll = function(callback) {
   Item.find({}, function(err, items) {
     if(err) {
       callback(err, null);
