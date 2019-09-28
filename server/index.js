@@ -13,26 +13,19 @@ app.use(express.static(__dirname + '/../../client/public'));
 
 
 app.get('/books', (req, res) => {
-  // if in database, get from database
-  axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${config.NYT_KEY}`)
-    .then((response) => {
-      res.send(response.data.results.books);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  // send back to client
-  // else
-  // API call
-  // put in database
-  // send back to client
-  // items.selectAll(function(err, data) {
-  //   if(err) {
-  //     res.sendStatus(500);
-  //   } else {
-  //     res.json(data);
-  //   }
-  // });
+  db.selectAll((err, data) => {
+    if (err) {
+      axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${config.NYT_KEY}`)
+        .then((response) => {
+          res.send(response.data.results.books);
+        })
+        .catch((error) => {
+          res.sendStatus(500);
+        });
+    } else {
+      res.send(data);
+    }
+  });
 });
 
 app.listen(3000, () => {
