@@ -17,6 +17,13 @@ app.get('/books', (req, res) => {
     if (err) {
       axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${config.NYT_KEY}`)
         .then((response) => {
+          db.save(response, (err, data) => {
+            if (err) {
+              res.sendStatus(500);
+            } else {
+              console.log('successfully added to database');
+            }
+          });
           res.send(response.data.results.books);
         })
         .catch((error) => {
