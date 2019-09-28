@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "react-dev": "webpack -d --watch",
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,16 @@
   "bugs": {
     "url": "https://github.com/wendy-wm-wu/netflix_for_books/issues"
   },
-  "homepage": "https://github.com/wendy-wm-wu/netflix_for_books#readme"
+  "homepage": "https://github.com/wendy-wm-wu/netflix_for_books#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^16.10.0",
+    "react-dom": "^16.10.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.0"
+  }
 }
