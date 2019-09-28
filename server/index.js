@@ -6,26 +6,26 @@ const config = require('./api.config.js');
 
 const db = require('./controllers/index.js');
 
-var app = express();
+let app = express();
 app.use(cors());
 
-app.use(express.static(__dirname + '/../client/public'));
+app.use(express.static(__dirname + '/../../client/public'));
 
 
-app.get('/books', function (req, res) {
-  //if in database, get from database
+app.get('/books', (req, res) => {
+  // if in database, get from database
   axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${config.NYT_KEY}`)
-  .then(function(response) {
-    res.send(response.data.results.books);
-  })
-  .catch(function(error) {
-    console.log(error);
-  }) 
-  //send back to client 
-  //else
-  //API call 
-  //put in database
-  //send back to client 
+    .then((response) => {
+      res.send(response.data.results.books);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  // send back to client
+  // else
+  // API call
+  // put in database
+  // send back to client
   // items.selectAll(function(err, data) {
   //   if(err) {
   //     res.sendStatus(500);
@@ -35,6 +35,6 @@ app.get('/books', function (req, res) {
   // });
 });
 
-app.listen(3000, function() {
+app.listen(3000, () => {
   console.log('listening on port 3000!');
 });
