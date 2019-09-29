@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
     this.state = { 
       books: [],
+      newBooks: [],
     }
     this.fetchBooks = this.fetchBooks.bind(this);
     this.searchBooks = this.searchBooks.bind(this);
@@ -53,8 +54,9 @@ class App extends React.Component {
   render () {
     return (
       <div>
+      <Search onSearch={this.searchBooks} />
+      <br />
       <BooksList books={this.state.books} />
-      <Search />
     </div>
     );
   }

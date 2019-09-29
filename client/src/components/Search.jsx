@@ -4,7 +4,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
+      term: '',
     }
     // this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -15,18 +15,22 @@ class Search extends React.Component {
 
   handleChange(event) {
     this.setState({
-      value: event.target.value,
+      term: event.target.value,
     });
+  }
+
+  search() {
+    this.props.onSearch(this.state.term);
   }
 
   render() {
     return (
       <div>
         <label for="book-search">Search books: </label>
-        <input type="search" id="book-search" placeholder="Search..." onChange={this.handleChange} ></input>
-        <button>Submit</button>
+        <input type="search" id="book-search" value={this.state.term} onChange={this.handleChange} ></input>
+        <button onClick={this.search.bind(this)}>Submit</button>
       </div>
-    );
+    )
   }
 }
 

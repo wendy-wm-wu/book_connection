@@ -1,42 +1,49 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Rank = styled.div`
-  margin: 30px 0px;
-  padding: 20px 50px;
-  -webkit-box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.21);
-  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.21);
-
-  &:before {
-    content: attr(nyt-rank);
-    font-family: 'Rozha One', serif;
-    font-size: 3rem;
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
-    padding: 20px 20px;
-    text-align: center;
-    -webkit-transform: translate(-100px);
-            transform: translate(-100px);
-    border: 4px solid #282c37;
-    background-color: #fff;
-    border-radius: 50%;
-    color: #282c37;
-    -webkit-box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.21);
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.21);
-  }
+const Title = styled.div`
+  color: #2b90d9;
+  line-height: 1.4;
+  font-family: 'Open Sans', sans-serif;
 `;
 
+const Author = styled.div`
+  color: #282c37;
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
+`;
+
+const Description = styled.div`
+  color: #282c37;
+  font-size: 13px;
+  font-family: 'Open Sans', sans-serif;
+`;
+
+const Image = styled.img`
+  display: block;
+  margin: left;
+  padding: 2em;
+  width: 200px;
+  -webkit-transform: translateY(-30px);
+          transform: translateY(-30px);
+  
+`;
+
+const Wrapper = styled.section`
+  padding: 2em;
+`;
 
 
 const Book = (props) => {
   return (
     <div>
-      <Rank>{props.rank}</Rank>
-      <p><img className={`cover ${props.rank}`} id="cover" src={`${props.image}`} /></p>
-      <h4>By {props.author}</h4>
-      <p>{props.description}</p>
+      <Image className={`cover ${props.rank}`} src={`${props.image}`} />
+      <Wrapper>
+      <Title>{props.title}</Title>
+      <Author>By {props.author}</Author>
+      <br/>
+      <Description>{props.description}</Description>
+      </Wrapper>
     </div>
   );
 };

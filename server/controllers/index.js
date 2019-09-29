@@ -1,4 +1,5 @@
-const Book = require('../../db/models/index.js');
+const Book = require('../../db/models/Book.js');
+const NewBook = require('../../db/models/NewBooks.js');
 
 const selectAll = (callback) => {
   Book.find({}, (err, items) => {
@@ -12,12 +13,11 @@ const selectAll = (callback) => {
 
 const save = (data) => {
   let title = new Book({
-    rank: Number,
-    weeks_on_list: Number,
-    isbn: Number,
-    description: String,
     title: String,
-    author: String,
+    author: Array,
+    description: String,
+    averageRating: Number,
+    ratingsCount: Number,
     image: String,
   });
   for (let i = 0; i < data.length; i++) {
@@ -37,7 +37,32 @@ const save = (data) => {
   }
 };
 
+const saveNewBook = (data) => {
+  let book = new NewBook({
+    title: String,
+    author: Array,
+    description: String,
+    averageRating: Number,
+    image: String,
+  });
+  for (let i in data) {
+    NewBook.create({
+      title: String,
+      author: Array,
+      description: String,
+      averageRating: Number,
+      image: String,
+    }, (err, book) => {
+      if (err) {
+        return handleError(err);
+      }
+    });
+  }
+}
+
+
 module.exports = {
   selectAll,
   save,
+  saveNewBook,
 };
