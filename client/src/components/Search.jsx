@@ -6,12 +6,12 @@ class Search extends React.Component {
     this.state = {
       value: '',
     }
-    this.handleSearch = this.handleSearch.bind(this);
+    // this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
-  handleSearch(title) {
-    //handles searches to the API 
-  }
+  // handleSearch(title) {
+  //   //handles searches to the API 
+  // }
 
   handleChange(event) {
     this.setState({

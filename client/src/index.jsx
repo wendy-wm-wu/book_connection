@@ -2,25 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
-import BooksRead from './components/BooksRead.jsx';
+import BooksList from './components/BooksList.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
       books: [],
-      bookCovers: {},
     }
+    this.fetchBooks = this.fetchBooks.bind(this);
   }
 
   componentDidMount() {
+    this.fetchBooks();
+  }
+  
+  fetchBooks() {
     $.ajax({
       url: '/books', 
       type: 'GET',
       success: (data) => {
         console.log('successful client call', data);
         this.setState({
-          books: data
+          books: data,
         })
       },
       error: (err) => {
@@ -32,8 +36,8 @@ class App extends React.Component {
   render () {
     return (
       <div>
-      <BooksRead books={this.state.books}/>
-      <Search books={this.state.books}/>
+      {/* <BooksList /> */}
+      <Search />
     </div>
     );
   }

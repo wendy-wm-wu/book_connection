@@ -12,6 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(__dirname + '/../../client/public'));
+app.use(express.static('./client/public'));
 
 
 app.get('/books', (req, res) => {
