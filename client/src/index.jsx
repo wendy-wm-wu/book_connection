@@ -11,6 +11,7 @@ class App extends React.Component {
       books: [],
     }
     this.fetchBooks = this.fetchBooks.bind(this);
+    this.searchBooks = this.searchBooks.bind(this);
   }
 
   componentDidMount() {
@@ -26,6 +27,22 @@ class App extends React.Component {
         this.setState({
           books: data,
         })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  searchBooks(searchedTerm) {
+    $.ajax({
+      url: '/books',
+      type: 'POST',
+      data: {
+        title: searchedTerm,
+      },
+      success: (data) => {
+        console.log('successfully added to database', data);
       },
       error: (err) => {
         console.log('err', err);
