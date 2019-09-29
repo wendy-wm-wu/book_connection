@@ -4,7 +4,7 @@ const NewBook = require('../../db/models/NewBooks.js');
 const selectAll = (callback) => {
   NewBook.find({})
     .sort({
-      id: 'asc',
+      _id: -1,
     })
     .limit(20).exec((err, items) => {
       if (err) {
