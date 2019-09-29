@@ -14,7 +14,7 @@ db.once('open', () => {
 
 const newBooksSchema = mongoose.Schema({
   title: String,
-  author: Array,
+  author: String,
   description: String,
   averageRating: Number,
   image: String,

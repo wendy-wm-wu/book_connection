@@ -5,8 +5,8 @@ const BooksList = (props) => {
   return (
     <div className="books-list">
       {props.books.map((book, index) => {
-        return <Book book={book} index={index} rank={book.rank} weeks={book.weeks_on_list} description={book.description} title={book.title} author={book.author} image={book.book_image} />
-      })};
+        return <Book book={book} index={index} title={book.title} author={book.author} description={book.description} image={book.image} />
+      })}
     </div>
   );
 }
@@ -14,3 +14,6 @@ const BooksList = (props) => {
 
 export default BooksList;
 
+
+// image={book.imageLinks.smallThumbnail}
+// averageRating={book.averageRating}

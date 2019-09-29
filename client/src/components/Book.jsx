@@ -37,7 +37,7 @@ const Wrapper = styled.section`
 const Book = (props) => {
   return (
     <div>
-      <Image className={`cover ${props.rank}`} src={`${props.image}`} />
+      <Image src={`${props.image}`} />
       <Wrapper>
       <Title>{props.title}</Title>
       <Author>By {props.author}</Author>

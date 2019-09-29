@@ -26,7 +26,7 @@ class App extends React.Component {
       success: (data) => {
         console.log('successful client call', data);
         this.setState({
-          books: data,
+          newBooks: data,
         })
       },
       error: (err) => {
@@ -44,6 +44,7 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log('successfully added to database', data);
+        this.fetchBooks();
       },
       error: (err) => {
         console.log('err', err);
@@ -56,7 +57,7 @@ class App extends React.Component {
       <div>
       <Search onSearch={this.searchBooks} />
       <br />
-      <BooksList books={this.state.books} />
+      <BooksList books={this.state.newBooks} />
     </div>
     );
   }

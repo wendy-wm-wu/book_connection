@@ -18,8 +18,9 @@ app.post('/books', (req, res) => {
   let title = req.body.title;
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}`)
     .then((response) => {
-      db.save(response.data.items);
-      res.send(response.data.items);
+      console.log(response.data.items,'stored in database');
+      db.saveNewBook(response.data.items);
+      res.sendStatus(201);
     })
     .catch((error) => {
       console.log(error);
@@ -27,6 +28,16 @@ app.post('/books', (req, res) => {
 });
 
 app.get('/books', (req, res) => {
+  db.selectAll((err, books) => {
+    if (err) {
+      throw err;
+    } else {
+      res.send(books);
+    }
+  });
+});
+
+app.get('/bestsellers', (req, res) => {
   axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${config.NYT_KEY}`)
     .then((response) => {
       db.save(response.data.results.books);
