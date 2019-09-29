@@ -10,7 +10,7 @@ const selectAll = (callback) => {
   });
 };
 
-const save = (data, callback) => {
+const save = (data) => {
   let title = new Book({
     rank: Number,
     weeks_on_list: Number,
@@ -20,21 +20,21 @@ const save = (data, callback) => {
     author: String,
     image: String,
   });
-  Book.create({
-    rank: data.rank,
-    weeks_on_list: data.weeks_on_list,
-    isbn: data.primary_isbn13,
-    description: data.description,
-    title: data.title,
-    author: data.author,
-    image: data.book_image,
-  }, (err, title) => {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, title);
-    }
-  });
+  for (let i = 0; i < data.length; i++) {
+    Book.create({
+      rank: data[i].rank,
+      weeks_on_list: data[i].weeks_on_list,
+      isbn: data[i].primary_isbn13,
+      description: data[i].description,
+      title: data[i].title,
+      author: data[i].author,
+      image: data[i].book_image,
+    }, (err, title) => {
+      if (err) {
+        return handleError(err);
+      }
+    });
+  }
 };
 
 module.exports = {
