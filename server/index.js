@@ -55,7 +55,16 @@ app.get('/api/events', (req, res) => {
     if (err) {
       throw err;
     } else {
-      console.log(venues);
+      let venueList = [];
+      let promises = [];
+      for (let i = 0; i < venues.length; i++) {
+        promises.push(axios.get(`https://www.eventbriteapi.com/v3/venues/${venues[i]}?token=${config.EVENTBRITE_KEY}`)
+        .then((response) => {
+          venueList.push(response);
+        }));
+      }
+      Promise.all(promises)
+      .then(() => console.log(venueList));
     }
   })
 })
