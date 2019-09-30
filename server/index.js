@@ -39,17 +39,25 @@ app.get('/api/books', (req, res) => {
 
 app.post('/api/events', (req, res) => {
     let city = req.body.city;
-    axios.get(`https://www.eventbriteapi.com/v3/events/search?location.address=sanfrancisco&q=books&token=${config.EVENTBRITE_KEY}`)
+    axios.get(`https://www.eventbriteapi.com/v3/events/search?location.address=${city}&q=books&token=${config.EVENTBRITE_KEY}`)
     .then((response) => {
-      
+      db.saveEvent(response.data.events.slice(0, 10));
+      res.sendStatus(201);
     })
     .catch((error) => {
       console.log(error);
     })
 })
 
-app.get('/api/events', (req, res) => {
 
+app.get('/api/events', (req, res) => {
+  db.grabVenues((err, venues) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(venues);
+    }
+  })
 })
 
 app.get('/bestsellers', (req, res) => {

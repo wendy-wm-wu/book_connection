@@ -16,6 +16,20 @@ const selectAll = (callback) => {
     });
 };
 
+const grabVenues = (callback) => {
+ Event.find({}, (err, docs) => {
+   if (err) {
+     callback(err, null);
+   } else {
+     let output = [];
+     for (let i = 0; i < docs.length; i++) {
+        output.push(docs[i].venue_id);
+     }
+     callback(null, output);
+   }
+ })
+}
+
 const save = (data) => {
   let title = new Book({
     title: String,
@@ -68,12 +82,34 @@ const saveNewBook = (data) => {
 };
 
 const saveEvent = (data) => {
-  
+  for (let i = 0; i < data.length; i++) {
+    let event = new Event({
+      name: data[i].name.text,
+      description: data[i].description.text,
+      venue_id: Number(data[i].venue_id),
+      start: data[i].start.local,
+      end: data[i].end.local,
+    });
+    Event.create({
+      name: data[i].name.text,
+      description: data[i].description.text,
+      venue_id: Number(data[i].venue_id),
+      start: data[i].start.local,
+      end: data[i].end.local,
+    }, (err, event) => {
+      if (err) {
+        return handleError(err);
+      }
+    })
+  }
 }
+
 
 
 module.exports = {
   selectAll,
   save,
   saveNewBook,
+  saveEvent,
+  grabVenues,
 };

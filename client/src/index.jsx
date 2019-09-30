@@ -44,6 +44,7 @@ class App extends React.Component {
     }
     this.fetchBooks = this.fetchBooks.bind(this);
     this.searchBooks = this.searchBooks.bind(this);
+    this.searchEvents = this.searchEvents.bind(this);
   }
 
   componentDidMount() {
@@ -83,7 +84,7 @@ class App extends React.Component {
     });
   }
 
-  fetchEvents(city) {
+  searchEvents(city) {
     $.ajax({
       url: '/api/events',
       type: 'POST',
@@ -98,6 +99,21 @@ class App extends React.Component {
       }
     });
   }
+
+  fetchEvents(city) {
+    $.ajax({
+      url: '/api/events',
+      type: 'GET',
+      success: (data) => {
+        console.log(data);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
+  
 
   render () {
     return (
