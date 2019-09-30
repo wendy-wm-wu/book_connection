@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import BooksList from './components/BooksList.jsx';
+import Map from './components/MapContainer.jsx';
 import styled from 'styled-components';
 
 const Logo = styled.img`
@@ -70,6 +71,7 @@ class App extends React.Component {
     return (
       <div>
       <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/BookConnectionLogo.png`} />
+      <Map />
       <Wrapper>
       <Search onSearch={this.searchBooks} />
       <br/>
