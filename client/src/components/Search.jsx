@@ -68,17 +68,21 @@ class Search extends React.Component {
     });
   }
 
-  search() {
+  searchBooks() {
     this.props.onSearch(this.state.term);
+  }
+
+  searchCity() {
+    this.props.onSearchEvents(this.state.city);
   }
 
   render() {
     return (
       <div>
         <Input type="search" id="book-search" value={this.state.term} onChange={this.handleChange} />
-        <Button onClick={this.search.bind(this)}>Search Books</Button>
+        <Button onClick={this.searchBooks.bind(this)}>Search Books</Button>
         <InputCity type="search" id="city-search" value={this.state.city} onChange={this.handleCityChange} />
-        <ButtonCity onClick={this.search.bind(this)}>Search City</ButtonCity>
+        <ButtonCity onClick={this.searchCity.bind(this)}>Search City</ButtonCity>
       </div>
     )
   }

@@ -109,6 +109,9 @@ class App extends React.Component {
       type: 'GET',
       success: (data) => {
         console.log(data);
+        this.setState({
+          venues: data,
+        });
       },
       error: (err) => {
         console.log('err', err);
@@ -129,7 +132,7 @@ class App extends React.Component {
       <BooksList books={this.state.newBooks} />
       </Wrapper>
       <MapWrapper>
-      <Map />
+      <Map venues={this.state.venues}/>
       </MapWrapper>
       </ContainerWrapper>
     </div>
