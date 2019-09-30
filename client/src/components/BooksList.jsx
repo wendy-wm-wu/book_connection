@@ -14,6 +14,3 @@ const BooksList = (props) => {
 
 export default BooksList;
 
-
-// image={book.imageLinks.smallThumbnail}
-// averageRating={book.averageRating}

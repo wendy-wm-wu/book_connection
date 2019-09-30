@@ -3,6 +3,20 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import BooksList from './components/BooksList.jsx';
+import styled from 'styled-components';
+
+const Logo = styled.img`
+  position: in-line block;
+  top: 0%;
+  left: 10%;
+  height: 150px;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  top: 8%;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -55,9 +69,12 @@ class App extends React.Component {
   render () {
     return (
       <div>
+      <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/BookConnectionLogo.png`} />
+      <Wrapper>
       <Search onSearch={this.searchBooks} />
-      <br />
+      <br/>
       <BooksList books={this.state.newBooks} />
+      </Wrapper>
     </div>
     );
   }
