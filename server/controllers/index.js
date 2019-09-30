@@ -1,6 +1,7 @@
 const Book = require('../../db/models/Book.js');
 const NewBook = require('../../db/models/NewBooks.js');
 const Event = require('../../db/models/Events.js');
+const Venue = require('../../db/models/Venues.js');
 
 const selectAll = (callback) => {
   NewBook.find({})
@@ -104,6 +105,25 @@ const saveEvent = (data) => {
   }
 }
 
+const saveVenue = (venues) => {
+  for (let i = 0; i < venues.length; i++) {
+    let venue = new Venue({
+      name: venues[i].data.name,
+      latitude: Number(venues[i].data.latitude),
+      longitude: Number(venues[i].data.longitude),
+    });
+    Venue.create({
+      name: venues[i].data.name,
+      latitude: Number(venues[i].data.latitude),
+      longitude: Number(venues[i].data.longitude),
+    }, (err, venue) => {
+      if (err) {
+        return handleError(err);
+      }
+    })
+  }
+}
+
 
 
 module.exports = {
@@ -112,4 +132,5 @@ module.exports = {
   saveNewBook,
   saveEvent,
   grabVenues,
+  saveVenue,
 };

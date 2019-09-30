@@ -14,7 +14,6 @@ db.once('open', () => {
 
 const venueSchema = mongoose.Schema({
   name: String,
-  address: String,
   latitude: Number,
   longitude: Number,
 });

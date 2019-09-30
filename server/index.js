@@ -41,7 +41,7 @@ app.post('/api/events', (req, res) => {
     let city = req.body.city;
     axios.get(`https://www.eventbriteapi.com/v3/events/search?location.address=${city}&q=books&token=${config.EVENTBRITE_KEY}`)
     .then((response) => {
-      db.saveEvent(response.data.events.slice(0, 10));
+      db.saveEvent(response.data.events);
       res.sendStatus(201);
     })
     .catch((error) => {
@@ -58,16 +58,29 @@ app.get('/api/events', (req, res) => {
       let venueList = [];
       let promises = [];
       for (let i = 0; i < venues.length; i++) {
-        promises.push(axios.get(`https://www.eventbriteapi.com/v3/venues/${venues[i]}?token=${config.EVENTBRITE_KEY}`)
-        .then((response) => {
-          venueList.push(response);
-        }));
+        promises.push(
+          axios.get(`https://www.eventbriteapi.com/v3/venues/${venues[i]}?token=${config.EVENTBRITE_KEY}`)
+            .then((response) => {
+              venueList.push(response);
+            }));
       }
       Promise.all(promises)
-      .then(() => console.log(venueList));
+        .then(() => {
+          db.saveVenue(venueList);
+          let output = [];
+          for (let i = 0; i < venueList.length; i++) {
+            output.push({
+              name: venueList[i].data.name,
+              latitude: venueList[i].data.latitude,
+              longitude: venueList[i].data.longitude,
+            });
+          }
+          res.send(output);
+        })
+        .catch((error) => console.log(error));
     }
-  })
-})
+  });
+});
 
 app.get('/bestsellers', (req, res) => {
   axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${config.NYT_KEY}`)
