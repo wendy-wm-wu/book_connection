@@ -88,7 +88,7 @@ class App extends React.Component {
       url: '/api/events',
       type: 'POST',
       data: {
-        
+        city: city,
       },
       success: (data) => {
         console.log('successfully added to database', data);

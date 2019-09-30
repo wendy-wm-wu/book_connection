@@ -38,7 +38,18 @@ app.get('/api/books', (req, res) => {
 });
 
 app.post('/api/events', (req, res) => {
-  
+    let city = req.body.city;
+    axios.get(`https://www.eventbriteapi.com/v3/events/search?location.address=sanfrancisco&q=books&token=${config.EVENTBRITE_KEY}`)
+    .then((response) => {
+      
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+})
+
+app.get('/api/events', (req, res) => {
+
 })
 
 app.get('/bestsellers', (req, res) => {

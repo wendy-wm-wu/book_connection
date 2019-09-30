@@ -1,27 +1,27 @@
-// const mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-// mongoose.connect('mongodb://localhost/books');
+mongoose.connect('mongodb://localhost/books');
 
-// const db = mongoose.connection;
+const db = mongoose.connection;
 
-// db.on('error', () => {
-//   console.log('mongoose connection error');
-// });
+db.on('error', () => {
+  console.log('mongoose connection error');
+});
 
-// db.once('open', () => {
-//   console.log('mongoose connected successfully');
-// });
+db.once('open', () => {
+  console.log('mongoose connected successfully');
+});
 
-// const bookSchema = mongoose.Schema({
-//   rank: Number,
-//   weeks_on_list: Number,
-//   isbn: Number,
-//   description: String,
-//   title: String,
-//   author: String,
-//   image: String,
-// });
+const bookSchema = mongoose.Schema({
+  rank: Number,
+  weeks_on_list: Number,
+  isbn: Number,
+  description: String,
+  title: String,
+  author: String,
+  image: String,
+});
 
-// const Book = mongoose.model('Book', bookSchema);
+const Book = mongoose.model('Book', bookSchema);
 
-// module.exports = Book;
+module.exports = Book;

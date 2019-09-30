@@ -1,5 +1,6 @@
 const Book = require('../../db/models/Book.js');
 const NewBook = require('../../db/models/NewBooks.js');
+const Event = require('../../db/models/Events.js');
 
 const selectAll = (callback) => {
   NewBook.find({})
@@ -66,9 +67,13 @@ const saveNewBook = (data) => {
   }
 };
 
+const saveEvent = (data) => {
+  
+}
+
 
 module.exports = {
   selectAll,
-  // save,
+  save,
   saveNewBook,
 };
