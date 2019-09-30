@@ -41,10 +41,12 @@ class App extends React.Component {
     this.state = { 
       books: [],
       newBooks: [],
+      venues: [],
     }
     this.fetchBooks = this.fetchBooks.bind(this);
     this.searchBooks = this.searchBooks.bind(this);
     this.searchEvents = this.searchEvents.bind(this);
+    this.fetchEvents = this.fetchEvents.bind(this);
   }
 
   componentDidMount() {
@@ -93,6 +95,7 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log('successfully added to database', data);
+        this.fetchEvents();
       },
       error: (err) => {
         console.log('err', err);
@@ -113,7 +116,7 @@ class App extends React.Component {
     });
   }
 
-  
+
 
   render () {
     return (
@@ -121,7 +124,7 @@ class App extends React.Component {
       <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/BookConnectionLogo.png`} />
       <ContainerWrapper>
       <Wrapper>
-      <Search onSearch={this.searchBooks} />
+      <Search onSearch={this.searchBooks} onSearchEvents={this.searchEvents}/>
       <br/>
       <BooksList books={this.state.newBooks} />
       </Wrapper>
