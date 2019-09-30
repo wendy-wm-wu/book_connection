@@ -83,10 +83,13 @@ class App extends React.Component {
     });
   }
 
-  fetchEvents() {
+  fetchEvents(city) {
     $.ajax({
       url: '/api/events',
-      type: 'GET',
+      type: 'POST',
+      data: {
+        
+      },
       success: (data) => {
         console.log('successfully added to database', data);
       },
