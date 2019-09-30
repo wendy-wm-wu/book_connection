@@ -30,7 +30,7 @@ const Image = styled.img`
 
 const Wrapper = styled.section`
   padding: 2em;
-  max-width: 500px;
+  max-width: 600px;
   font-family: 'Open Sans', sans-serif;
   font-size: 13px;
 `;

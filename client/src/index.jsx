@@ -10,13 +10,29 @@ const Logo = styled.img`
   position: in-line block;
   top: 0%;
   left: 10%;
-  height: 150px;
+  height: 175px;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  flex-flow: column;
   top: 8%;
+  flex-wrap: wrap;
+`;
+
+const ContainerWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+`;
+
+const MapWrapper = styled.div`
+  position: fixed;
+  margin-left: 50%;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
 `;
 
 class App extends React.Component {
@@ -36,7 +52,7 @@ class App extends React.Component {
   
   fetchBooks() {
     $.ajax({
-      url: '/books', 
+      url: '/api/books', 
       type: 'GET',
       success: (data) => {
         console.log('successful client call', data);
@@ -52,7 +68,7 @@ class App extends React.Component {
 
   searchBooks(searchedTerm) {
     $.ajax({
-      url: '/books',
+      url: '/api/books',
       type: 'POST',
       data: {
         title: searchedTerm,
@@ -67,16 +83,33 @@ class App extends React.Component {
     });
   }
 
+  fetchEvents() {
+    $.ajax({
+      url: '/api/events',
+      type: 'GET',
+      success: (data) => {
+        console.log('successfully added to database', data);
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+  }
+
   render () {
     return (
       <div>
       <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/BookConnectionLogo.png`} />
-      <Map />
+      <ContainerWrapper>
       <Wrapper>
       <Search onSearch={this.searchBooks} />
       <br/>
       <BooksList books={this.state.newBooks} />
       </Wrapper>
+      <MapWrapper>
+      <Map />
+      </MapWrapper>
+      </ContainerWrapper>
     </div>
     );
   }

@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + '/../../client/public'));
 app.use(express.static('./client/public'));
 
-app.post('/books', (req, res) => {
+app.post('/api/books', (req, res) => {
   let title = req.body.title;
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}`)
     .then((response) => {
@@ -27,7 +27,7 @@ app.post('/books', (req, res) => {
     })
 });
 
-app.get('/books', (req, res) => {
+app.get('/api/books', (req, res) => {
   db.selectAll((err, books) => {
     if (err) {
       throw err;
@@ -36,6 +36,10 @@ app.get('/books', (req, res) => {
     }
   });
 });
+
+app.post('/api/events', (req, res) => {
+  
+})
 
 app.get('/bestsellers', (req, res) => {
   axios.get(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=${config.NYT_KEY}`)
