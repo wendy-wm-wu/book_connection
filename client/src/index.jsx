@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import BooksList from './components/BooksList.jsx';
-import Map from './components/MapContainer.jsx';
+import MapContainer from './components/MapContainer.jsx';
 import styled from 'styled-components';
 
 const Logo = styled.img`
@@ -132,7 +132,7 @@ class App extends React.Component {
       <BooksList books={this.state.newBooks} />
       </Wrapper>
       <MapWrapper>
-      <Map venues={this.state.venues}/>
+      <MapContainer venues={this.state.venues}/>
       </MapWrapper>
       </ContainerWrapper>
     </div>
