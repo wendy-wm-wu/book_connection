@@ -56,15 +56,17 @@ class Book extends React.Component{
   }
   render() {
     let description = <Description>{this.props.description}</Description>;
-    if (this.props.description.length > 100) {
-      description = (
-        <span>
+    if (this.props.description) {
+      if (this.props.description.length > 100 && this.props.description.length) {
+        description = (
           <span>
-            {this.props.description.slice(0, 200)} ...
+            <span>
+              {this.props.description.slice(0, 200)} ...
+            </span>
+              <ReadMore onClick={this.expandText}>Read more</ReadMore>
           </span>
-            <ReadMore onClick={this.expandText}>Read more</ReadMore>
-        </span>
-      );
+        );
+      }
     }
     if (this.state.expanded) {
       description = <Description>{this.props.description}</Description>
