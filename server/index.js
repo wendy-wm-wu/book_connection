@@ -42,6 +42,7 @@ app.post('/api/events', (req, res) => {
     axios.get(`https://www.eventbriteapi.com/v3/events/search?location.address=${city}&q=books&token=${config.EVENTBRITE_KEY}`)
     .then((response) => {
       db.saveEvent(response.data.events);
+      res.send(response.data.events);
       res.sendStatus(201);
     })
     .catch((error) => {

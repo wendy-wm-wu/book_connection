@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Search from './components/Search.jsx';
 import BooksList from './components/BooksList.jsx';
+import EventsList from './components/EventsList.jsx';
 import MapContainer from './components/MapContainer.jsx';
 import styled from 'styled-components';
 
@@ -10,7 +11,7 @@ const Logo = styled.img`
   position: in-line block;
   top: 0%;
   left: 20%;
-  height: 85px;
+  height: 100px;
 `;
 
 const Wrapper = styled.div`
@@ -43,6 +44,7 @@ class App extends React.Component {
       books: [],
       newBooks: [],
       venues: [],
+      events: [],
     }
     this.fetchBooks = this.fetchBooks.bind(this);
     this.searchBooks = this.searchBooks.bind(this);
