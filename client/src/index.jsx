@@ -25,11 +25,12 @@ const ContainerWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 50%;
+  margin-left: 3%;
 `;
 
 const MapWrapper = styled.div`
   position: fixed;
-  margin-left: 50%;
+  margin-left: 53%;
   width: 100%;
   height: 100%;
   z-index: 99;

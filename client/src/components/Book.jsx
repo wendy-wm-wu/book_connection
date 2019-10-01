@@ -1,4 +1,5 @@
 import React from 'react';
+import StarRatings from './StarRatings.jsx';
 import styled from 'styled-components';
 
 const Title = styled.div`
@@ -22,7 +23,7 @@ const Image = styled.img`
   display: block;
   margin-left: 23%;
   padding: 1em;
-  width: 200px;
+  width: 150px;
   -webkit-transform: translateY(-30px);
           transform: translateY(-30px);
   

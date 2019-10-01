@@ -13,12 +13,13 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  color: black;
+  color: white;
   font-size: 1em;
   margin: 1em;
-  padding: 0.25em 1em;
-  border: 1px solid black;
+  padding: 0.25em 2em;
   border-radius: 3px;
+  background: #2b90d9;
+  height: 38px;
 `;
 
 const InputCity = styled.input`
@@ -33,12 +34,13 @@ const InputCity = styled.input`
 `;
 
 const ButtonCity = styled.button`
-  color: black;
+  color: white;
   font-size: 1em;
   margin: 1em;
-  padding: 0.25em 1em;
-  border: 1px solid black;
+  padding: 0.25em 2em;
   border-radius: 3px;
+  background: #2b90d9;
+  height: 38px;
 `;
 
 class Search extends React.Component {

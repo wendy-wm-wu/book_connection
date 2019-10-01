@@ -6,13 +6,46 @@ class MapContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      coords: '',
+      showingInfoWindow: false,
+      activeMarker: {},
+      selectedPlace: {},
+    }
+    this.onMarkerClick = this.onMarkerClick.bind(this);
+    this.onClose = this.onClose.bind(this);
+    this.onMapClicked = this.onMapClicked.bind(this);
+  }
+  onMarkerClick(props, marker, event) {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+    });
+  }
+
+  onClose(props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null,
+      });
     }
   }
+
+  onMapClicked(props) {
+    if (this.state.showingInfoWindow) {
+      this.setState({
+        showingInfoWindow: false,
+        activeMarker: null,
+      });
+    }
+  }
+
   render() {
     let marker = [];
+    let infoWindow = [];
     for (let i = 0; i < this.props.venues.length; i++) {
-        marker.push(<Marker name={`${this.props.venues[i].name}`} position={{ lat: `${this.props.venues[i].latitude}`, lng: `${this.props.venues[i].longitude}` }}  />);
+        marker.push(<Marker name={`${this.props.venues[i].name}`} position={{ lat: `${this.props.venues[i].latitude}`, lng: `${this.props.venues[i].longitude}` }}  onClick={this.onMarkerClick} />);
+        infoWindow.push(<InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow} onClose={this.onClose}><div><h4>{this.state.selectedPlace.name}</h4></div></InfoWindow>)
     }
     const style = {
       width: '40%',
@@ -21,8 +54,9 @@ class MapContainer extends Component {
     }
     return (
     <div className="App">
-    <Map google={this.props.google} style={style}>
+    <Map google={this.props.google} style={style} onClick={this.onMapClicked}>
       {marker}
+      {infoWindow}
     </Map>
     </div>
     );
