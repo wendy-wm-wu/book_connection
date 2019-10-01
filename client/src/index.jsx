@@ -98,6 +98,9 @@ class App extends React.Component {
       },
       success: (data) => {
         console.log('successfully added to database', data);
+        this.setState({
+          events: data,
+        });
         this.fetchEvents();
       },
       error: (err) => {
