@@ -9,8 +9,8 @@ import styled from 'styled-components';
 const Logo = styled.img`
   position: in-line block;
   top: 0%;
-  left: 10%;
-  height: 175px;
+  left: 20%;
+  height: 85px;
 `;
 
 const Wrapper = styled.div`
@@ -125,7 +125,9 @@ class App extends React.Component {
   render () {
     return (
       <div>
-      <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/BookConnectionLogo.png`} />
+      <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/bookconnectionlogo.png`} />
+      <hr style={{ height: 0.5}}/>
+      <br />
       <ContainerWrapper>
       <Wrapper>
       <Search onSearch={this.searchBooks} onSearchEvents={this.searchEvents}/>
