@@ -20,8 +20,8 @@ const Description = styled.div`
 
 const Image = styled.img`
   display: block;
-  margin: left;
-  padding: 2em;
+  margin-left: 23%;
+  padding: 1em;
   width: 200px;
   -webkit-transform: translateY(-30px);
           transform: translateY(-30px);
