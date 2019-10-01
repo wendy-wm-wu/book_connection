@@ -18,15 +18,22 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   flex-flow: column;
-  top: 8%;
-  flex-wrap: wrap;
+  top: 15%;
+  flex-wrap: no wrap;
+`;
+
+const SearchWrapper = styled.div`
+  position: absolute;
+  top: 2%;
+  left: 40%;
+  z-index: 99;
 `;
 
 const ContainerWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 50%;
-  margin-left: 3%;
+  width: 53%;
+  margin-left: 2%;
 `;
 
 const MapWrapper = styled.div`
@@ -35,6 +42,13 @@ const MapWrapper = styled.div`
   width: 100%;
   height: 100%;
   z-index: 99;
+`;
+
+const EventsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-flow: column;
+  flex-wrap: wrap;
 `;
 
 class App extends React.Component {
@@ -133,16 +147,20 @@ class App extends React.Component {
       <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/bookconnectionlogo.png`} />
       <hr style={{ height: 0.5}}/>
       <br />
+        <SearchWrapper>
+      <Search onSearch={this.searchBooks} onSearchEvents={this.searchEvents}/>
+        </SearchWrapper>
       <ContainerWrapper>
       <Wrapper>
-      <Search onSearch={this.searchBooks} onSearchEvents={this.searchEvents}/>
       <br/>
       <BooksList books={this.state.newBooks} />
       </Wrapper>
       <MapWrapper>
       <MapContainer venues={this.state.venues}/>
       </MapWrapper>
+      <EventsWrapper>
       <EventsList events={this.state.events} />
+      </EventsWrapper>
       </ContainerWrapper>
     </div>
     );

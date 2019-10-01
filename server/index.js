@@ -39,10 +39,11 @@ app.get('/api/books', (req, res) => {
 
 app.post('/api/events', (req, res) => {
     let city = req.body.city;
+    city = city.replace(/ +/g, "");
     axios.get(`https://www.eventbriteapi.com/v3/events/search?location.address=${city}&q=books&token=${config.EVENTBRITE_KEY}`)
     .then((response) => {
-      db.saveEvent(response.data.events);
-      res.send(response.data.events);
+      db.saveEvent(response.data.events.slice(0, 10));
+      res.send(response.data.events.slice(0, 10));
     })
     .catch((error) => {
       console.log(error);
@@ -55,6 +56,7 @@ app.get('/api/events', (req, res) => {
     if (err) {
       throw err;
     } else {
+      venues = venues.slice(0, 10);
       let venueList = [];
       let promises = [];
       for (let i = 0; i < venues.length; i++) {

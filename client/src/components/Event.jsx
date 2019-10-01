@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 import styled from 'styled-components';
 
 const Name = styled.div`
@@ -8,17 +9,17 @@ const Name = styled.div`
   font-family: 'Open Sans', sans-serif;
 `;
 
-const Start = styled.div`
-  color: #282c37;
-  font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
-`;
+// const Start = styled.div`
+//   color: #282c37;
+//   font-size: 14px;
+//   font-family: 'Open Sans', sans-serif;
+// `;
 
-const End = styled.div`
-  color: #282c37;
-  font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
-`;
+// const End = styled.div`
+//   color: #282c37;
+//   font-size: 14px;
+//   font-family: 'Open Sans', sans-serif;
+// `;
 
 const Wrapper = styled.section`
   padding: 2em;
@@ -69,9 +70,12 @@ class Event extends React.Component{
     <div>
       <Wrapper>
       <Name>{this.props.name}</Name>
-      <Start>{this.props.start}</Start>
-      <End>{this.props.end}</End>
+      <br />
+      {`${moment(this.props.start).format('ddd, MMM Do, YYYY, h:mm A')} -
+        ${moment(this.props.end).format('ddd, MMM Do, YYYY, h:mm A')}
+     `}
       <br/>
+      <br />
       {description}
       </Wrapper>
     </div>
