@@ -43,7 +43,6 @@ app.post('/api/events', (req, res) => {
     .then((response) => {
       db.saveEvent(response.data.events);
       res.send(response.data.events);
-      res.sendStatus(201);
     })
     .catch((error) => {
       console.log(error);

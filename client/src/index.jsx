@@ -142,6 +142,7 @@ class App extends React.Component {
       <MapWrapper>
       <MapContainer venues={this.state.venues}/>
       </MapWrapper>
+      <EventsList events={this.state.events} />
       </ContainerWrapper>
     </div>
     );

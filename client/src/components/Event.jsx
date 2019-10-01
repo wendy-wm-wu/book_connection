@@ -1,31 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Title = styled.div`
+const Name = styled.div`
   color: #2b90d9;
   line-height: 1.4;
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
 `;
 
-const Author = styled.div`
+const Start = styled.div`
   color: #282c37;
   font-size: 14px;
   font-family: 'Open Sans', sans-serif;
 `;
 
-const Description = styled.div`
+const End = styled.div`
   color: #282c37;
-`;
-
-const Image = styled.img`
-  display: block;
-  margin-left: 23%;
-  padding: 1em;
-  width: 150px;
-  -webkit-transform: translateY(-30px);
-          transform: translateY(-30px);
-  
+  font-size: 14px;
+  font-family: 'Open Sans', sans-serif;
 `;
 
 const Wrapper = styled.section`
@@ -35,12 +27,16 @@ const Wrapper = styled.section`
   font-size: 13px;
 `;
 
+const Description = styled.div`
+  color: #282c37;
+`;
+
 const ReadMore = styled.span`
   color: #2b90d9;
   font-size: 13px;
 `;
 
-class Book extends React.Component{
+class Event extends React.Component{
   constructor(props) {
     super(props);
 
@@ -60,7 +56,7 @@ class Book extends React.Component{
       description = (
         <span>
           <span>
-            {this.props.description.slice(0, 200)} ...
+            {this.props.description.slice(0, 150)} ...
           </span>
             <ReadMore onClick={this.expandText}>Read more</ReadMore>
         </span>
@@ -69,13 +65,12 @@ class Book extends React.Component{
     if (this.state.expanded) {
       description = <Description>{this.props.description}</Description>
     }
-
     return (
     <div>
-      <Image src={`${this.props.image}`} />
       <Wrapper>
-      <Title>{this.props.title}</Title>
-      <Author>By {this.props.author}</Author>
+      <Name>{this.props.name}</Name>
+      <Start>{this.props.start}</Start>
+      <End>{this.props.end}</End>
       <br/>
       {description}
       </Wrapper>
@@ -85,4 +80,4 @@ class Book extends React.Component{
 }
 
 
-export default Book;
+export default Event;
