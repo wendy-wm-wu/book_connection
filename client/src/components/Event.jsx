@@ -53,15 +53,17 @@ class Event extends React.Component{
   }
   render() {
     let description = <Description>{this.props.description}</Description>;
-    if (this.props.description.length > 100) {
-      description = (
-        <span>
+    if (this.props.description) {
+      if (this.props.description.length > 100) {
+        description = (
           <span>
-            {this.props.description.slice(0, 150)} ...
+            <span>
+              {this.props.description.slice(0, 150)} ...
+            </span>
+              <ReadMore onClick={this.expandText}>Read more</ReadMore>
           </span>
-            <ReadMore onClick={this.expandText}>Read more</ReadMore>
-        </span>
-      );
+        );
+      }
     }
     if (this.state.expanded) {
       description = <Description>{this.props.description}</Description>
