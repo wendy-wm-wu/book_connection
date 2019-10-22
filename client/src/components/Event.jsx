@@ -9,18 +9,6 @@ const Name = styled.div`
   font-family: 'Open Sans', sans-serif;
 `;
 
-// const Start = styled.div`
-//   color: #282c37;
-//   font-size: 14px;
-//   font-family: 'Open Sans', sans-serif;
-// `;
-
-// const End = styled.div`
-//   color: #282c37;
-//   font-size: 14px;
-//   font-family: 'Open Sans', sans-serif;
-// `;
-
 const Wrapper = styled.section`
   padding: 2em;
   max-width: 600px;
