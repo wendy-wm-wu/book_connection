@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import history from './history';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const Form = styled.form`
+  font-family: 'Montserrat';
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
 
 class Login extends Component {
   constructor(props) {
@@ -28,7 +37,7 @@ class Login extends Component {
     })
     .then((response) => {
       if (response.data === 'success') {
-        history.push('./app');
+        history.push('./user');
       } else {
         this.setState({
           error: true,
@@ -50,6 +59,7 @@ class Login extends Component {
     }
 
     return (
+      <div>
       <Form>
         <div>
           <label>Username:</label>
@@ -63,10 +73,11 @@ class Login extends Component {
         </div>
         <br />
         <div>
-          <input type="submit" value="Log-in" onClick={(e) => this.login}/> <br />
+          <input type="submit" value="Log-in" onClick={(e) => this.login(e)}/> <br />
           <input type="submit" value="Sign-up" />
         </div>
       </Form>
+      </div>
     );
   }
 }
