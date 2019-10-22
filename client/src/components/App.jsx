@@ -1,13 +1,10 @@
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
 import $ from 'jquery';
 import Search from './Search.jsx';
 import BooksList from './BooksList.jsx';
 import EventsList from './EventsList.jsx';
 import MapContainer from './MapContainer.jsx';
 import styled from 'styled-components';
-import Login from './Login.jsx';
-import history from './history';
 
 const Logo = styled.img`
   position: in-line block;
