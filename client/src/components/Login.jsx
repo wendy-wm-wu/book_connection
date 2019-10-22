@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import history from './history';
 import axios from 'axios';
 
@@ -8,79 +7,68 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      username: '',
-      password: '',
-      loginError: false,
-      registerError: false,
+      error: false,
     }
-    this.logIn = this.logIn.bind(this);
-    this.register = this.signUp.bind(this);
+   this.handleChange = this.handleChange.bind(this);
+   this.login = this.login.bind(this);
   }
 
-  logIn() {
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  login(e) {
+    e.preventDefault();
     const { username, password } = this.state;
-    const { loginHandler } = this.props;
     axios.post('/api/login', {
       username,
       password
     })
     .then((response) => {
-      const { isValid, id } = response.data;
-      if (isValid) {
-        loginHandler(id);
+      if (response.data === 'success') {
+        history.push('./app');
       } else {
         this.setState({
-          loginError: true
+          error: true,
         })
       }
     })
-    .catch((err) => {
-      console.log(err);
+    .catch((error) => {
+      console.log(error);
     })
-  }
-
-  register() {
-    const { username, password } = this.state;
-
-    axios.post('/api/register', {
-      username,
-      password,
-    })
-    .then((response) => {
-      if (response.data) {
-        this.state.signUpError = false;
-      } else {
-        this.setState({
-          signUpError: true
-        }, () => this.state.signUpError = false)
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   }
 
   render() {
-    const { logIn, signUp, loggedIn } = this.props;
-    const { loginError, signUpError } = this.state;
+    let isError;
+
+    if (this.state.error) {
+      isError = true;
+    } else {
+      isError = false; 
+    }
+
     return (
       <Form>
         <div>
           <label>Username:</label>
-          <input type="test" name="username" placeholder="Username" />
+          <input type="text" name="username" placeholder="Username" onChange={e => this.handleChange(e)}
+          />
         </div>
         <br />
         <div>
           <label>Password:</label>
-          <input type="password" name="password" placeholder="Password" />
+          <input type="password" name="password" placeholder="Password" onChange={e => this.handleChange(e)}/>
         </div>
         <br />
         <div>
-          <input type="submit" value="Log-in" /> <br />
+          <input type="submit" value="Log-in" onClick={(e) => this.login}/> <br />
           <input type="submit" value="Sign-up" />
         </div>
       </Form>
     );
   }
-
 }
+
+export default Login; 
