@@ -61,8 +61,6 @@ class App extends React.Component {
       newBooks: [],
       venues: [],
       events: [],
-      loggedIn: false,
-      userId: 0,
     }
     this.fetchBooks = this.fetchBooks.bind(this);
     this.searchBooks = this.searchBooks.bind(this);
