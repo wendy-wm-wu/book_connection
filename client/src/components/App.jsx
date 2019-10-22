@@ -1,12 +1,13 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import Search from './components/Search.jsx';
-import BooksList from './components/BooksList.jsx';
-import EventsList from './components/EventsList.jsx';
-import MapContainer from './components/MapContainer.jsx';
+import Search from './Search.jsx';
+import BooksList from './BooksList.jsx';
+import EventsList from './EventsList.jsx';
+import MapContainer from './MapContainer.jsx';
 import styled from 'styled-components';
+import Login from './Login.jsx';
+import history from './history';
 
 const Logo = styled.img`
   position: in-line block;
@@ -60,6 +61,8 @@ class App extends React.Component {
       newBooks: [],
       venues: [],
       events: [],
+      loggedIn: false,
+      userId: 0,
     }
     this.fetchBooks = this.fetchBooks.bind(this);
     this.searchBooks = this.searchBooks.bind(this);
