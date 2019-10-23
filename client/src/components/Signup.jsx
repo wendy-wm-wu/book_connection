@@ -10,7 +10,7 @@ class Signup extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.signup = this.signup.bind(this);
   }
-  
+
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -38,7 +38,26 @@ class Signup extends Component {
 
   render() {
     return (
-      <div></div>
+      <div>
+        <Form>
+          <div>
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="username" onChange={e => this.handleChange(e)} /> 
+            <br />
+          </div>
+          <div>
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="password" onChange={e => this.handleChange(e)} />
+          </div>
+          <br />
+          <div>
+            <input type="submit" value="Create an account" onClick={(e) => this.signup(e)} />
+            <br />
+          </div>
+        </Form>
+      </div>
     );
   }
 }
+
+export default Signup;
