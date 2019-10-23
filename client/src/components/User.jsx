@@ -50,7 +50,7 @@ const EventsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-class App extends React.Component {
+class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
@@ -166,5 +166,5 @@ class App extends React.Component {
   }
 }
 
-export default App; 
+export default User; 
 
