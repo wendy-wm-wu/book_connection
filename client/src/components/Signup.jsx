@@ -10,6 +10,7 @@ class Signup extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.signup = this.signup.bind(this);
   }
+  
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
