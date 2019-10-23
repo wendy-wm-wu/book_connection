@@ -50,13 +50,9 @@ class Search extends React.Component {
       term: '',
       city: '',
     }
-    // this.handleSearch = this.handleSearch.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleCityChange = this.handleCityChange.bind(this);
   }
-  // handleSearch(title) {
-  //   //handles searches to the API 
-  // }
 
   handleChange(event) {
     this.setState({
