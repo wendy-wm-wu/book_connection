@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import history from './history';
 import axios from 'axios';
 
+const Form = styled.form`
+  font-family: 'Montserrat';
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;
+
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -43,6 +51,7 @@ class Signup extends Component {
           <div>
             <label>Username:</label>
             <input type="text" name="username" placeholder="username" onChange={e => this.handleChange(e)} /> 
+            <br />
             <br />
           </div>
           <div>

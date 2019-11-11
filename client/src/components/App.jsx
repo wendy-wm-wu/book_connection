@@ -8,7 +8,7 @@ import history from './history';
 
 export default function App() {
   return (
-    <Router history={history}>
+    <Router history = {history}>
       <Route exact path = '/' component = { Home } />
       <Route path = '/login' component = { Login } />
       <Route path = '/signup' component = { Signup } />
