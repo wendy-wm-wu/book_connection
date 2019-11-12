@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
@@ -28,12 +29,12 @@ const NavBar = () => {
   const [ user, setUser ] = useState('');
   const navStyle = {
     color: 'white',
-    text-decoration: 'none',
+    textDecoration: 'none',
   }
 
-  const getLoggedInUser = () => {
+  // const getLoggedInUser = () => {
 
-  }
+  // }
 
   return (
     <Nav>

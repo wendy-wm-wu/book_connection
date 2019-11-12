@@ -1,85 +1,78 @@
-import React, { Component } from 'react';
-import history from './history';
+import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-const Form = styled.form`
-  font-family: 'Montserrat';
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+const Container = styled.div`
+  padding: 30px;
+  font-family: sans-serif;
+  margin-top: 50px;
 `;
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+`;
 
-    this.state = {
-      error: false,
-    }
-   this.handleChange = this.handleChange.bind(this);
-   this.login = this.login.bind(this);
-  }
+const Button = styled.button`
+  font-family: sans-serif;
+  font-size: 20px;
+  background-color: #70587C;
+  padding: 10px;
+  margin: 10px;
+  margin-left: 0px;
+  color: white;
+  width: 100px;
+`;
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  login(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { username, password } = this.state;
-    axios.post('/api/login', {
-      username,
-      password
-    })
-    .then((response) => {
-      if (response.data === 'success') {
-        history.push('./user');
-      } else {
-        this.setState({
-          error: true,
-        })
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
+    const regInfo = { username, password };
+    axios.post('./login', regInfo)
+      .then((res) => {
+        const user = res.data;
+        if (user) {
+          window.location = '/';
+        }
+        setUsername('');
+        setPassword('');
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
 
-  render() {
-    let isError;
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
 
-    if (this.state.error) {
-      isError = true;
-    } else {
-      isError = false; 
-    }
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
-    return (
-      <div>
+  return (
+    <Container>
+      <h1>Login</h1>
       <Form>
-        <div>
-          <label>Username:</label>
-          <input type="text" name="username" placeholder="Username" onChange={e => this.handleChange(e)}
-          />
-        </div>
-        <br />
-        <div>
-          <label>Password:</label>
-          <input type="password" name="password" placeholder="Password" onChange={e => this.handleChange(e)}/>
-        </div>
-        <br />
-        <div>
-          <input type="submit" value="Log-in" onClick={(e) => this.login(e)}/> <br />
-          <input type="submit" value="Sign-up" />
-        </div>
+        <label htmlFor="username">
+          <br />
+          Username:
+          <input type="text" name="username" onChange={handleUsernameChange} value={username} />
+        </label>
+        <label htmlFor="password">
+          Password:
+          <input type="password" name="password" onChange={handlePasswordChange} value={password} />
+        </label>
+        <Button type="button" onClick={handleSubmit}>Submit</Button>
       </Form>
-      </div>
-    );
-  }
-}
+    </Container>
+  );
 
-export default Login; 
+};
+
+export default Login;
+  
