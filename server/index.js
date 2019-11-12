@@ -16,6 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, '/../../client/public')));
 app.use(express.static('./client/public'));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.post('/api/books', (req, res) => {
   let title = req.body.title;
