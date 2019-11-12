@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
@@ -32,9 +33,16 @@ const NavBar = () => {
     textDecoration: 'none',
   }
 
-  // const getLoggedInUser = () => {
-
-  // }
+  const getLoggedInUser = () => {
+    axios.get('/api/session')
+    .then((res) => {
+      setUser(res.data.username);
+    });
+  };
+  
+  useEffect(() => {
+    getLoggedInUser();
+  });
 
   return (
     <Nav>
@@ -46,7 +54,7 @@ const NavBar = () => {
         <Link style={navStyle} to="/login">
           <li>Log-in</li>
         </Link>
-        <Link style={navStyle} to="/register">
+        <Link style={navStyle} to="/signup">
           <li>Register</li>
         </Link>
         <Link style={navStyle} to="/logout">

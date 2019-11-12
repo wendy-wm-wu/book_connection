@@ -32,7 +32,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const regInfo = { username, password };
-    axios.post('./login', regInfo)
+    axios.post('/login', regInfo)
       .then((res) => {
         const user = res.data;
         if (user) {

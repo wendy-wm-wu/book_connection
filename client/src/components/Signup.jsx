@@ -1,72 +1,80 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import history from './history';
 import axios from 'axios';
 
-const Form = styled.form`
-  font-family: 'Montserrat';
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+const Container = styled.div`
+  padding: 30px;
+  font-family: sans-serif;
+  margin-top: 50px;
 `;
 
-class Signup extends Component {
-  constructor(props) {
-    super(props);
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+`;
 
-    this.handleChange = this.handleChange.bind(this);
-    this.signup = this.signup.bind(this);
-  }
+const Button = styled.button`
+  font-family: sans-serif;
+  font-size: 20px;
+  background-color: #70587C;
+  padding: 10px;
+  margin: 10px;
+  margin-left: 0px;
+  color: white;
+  width: 100px;
+`;
 
-  handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
+const Signup = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  signup(e) {
-    e.preventDefault();
-    const { username, password } = this.state;
-    axios.post('/api/register', {
-      username,
-      password
-    })
-    .then((response) => {
-      if (response.data === 'success') {
-        history.push('/user');
-      } else {
-        console.log('not registered');
-      }
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
+  const handleSubmit = () => {
+    const regInfo = { username, password };
+    axios.post('/signup', regInfo)
+      .then((res) => {
+        alert('Account created!');
+        window.location = '/login';
+        setUsername('');
+        setPassword('');
+      })
+      .catch((err) => {
+        const errorMessages = err.response.data;
+        let errors = [];
+        for (let i = 0; i < errorMessages.length; i++) {
+          errors.push(errorMessages[i].msg);
+        }
+        alert(errors.join('\n'));
+      });
+  };
 
-  render() {
-    return (
-      <div>
-        <Form>
-          <div>
-            <label>Username:</label>
-            <input type="text" name="username" placeholder="username" onChange={e => this.handleChange(e)} /> 
-            <br />
-            <br />
-          </div>
-          <div>
-            <label>Password:</label>
-            <input type="password" name="password" placeholder="password" onChange={e => this.handleChange(e)} />
-          </div>
-          <br />
-          <div>
-            <input type="submit" value="Create an account" onClick={(e) => this.signup(e)} />
-            <br />
-          </div>
-        </Form>
-      </div>
-    );
-  }
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  return (
+    <Container>
+      <h1>Create an account</h1>
+      <br />
+      <Form>
+        <label htmlFor="username">
+          Username:
+          <input type="text" name="username" onChange={handleUsernameChange} value={username} />
+        </label>
+        <label htmlFor="password">
+          Password:
+          <input type="text" name="username" onChange={handlePasswordChange} value={password} />
+        </label>
+        <Button type="button" onClick={handleSubmit}>Submit</Button>
+      </Form>
+    </Container>
+  );
 }
 
 export default Signup;
+  
