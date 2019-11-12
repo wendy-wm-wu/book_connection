@@ -4,6 +4,7 @@ import NavBar from './NavBar.jsx';
 import User from './Home.jsx';
 import Home from './Home.jsx';
 import Login from './Login.jsx';
+import Logout from './Logout.jsx';
 import Signup from './Signup.jsx';
 import history from './history';
 
@@ -16,6 +17,7 @@ export default function App() {
           {/* <Route path = '/' exact component = { Home } /> */}
           <Route path = '/login' component = { Login } />
           <Route path = '/signup' component = { Signup } />
+          <Route path = '/logout' component = { Logout } />
           <Route path = '/user' component = { User } />
         </Switch>
       </div>
