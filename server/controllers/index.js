@@ -127,10 +127,5 @@ const saveVenue = (venues) => {
 
 
 module.exports = {
-  selectAll,
-  save,
-  saveNewBook,
-  saveEvent,
-  grabVenues,
-  saveVenue,
+  selectAll, save, saveNewBook, saveEvent, grabVenues, saveVenue,
 };
