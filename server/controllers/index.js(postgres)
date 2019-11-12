@@ -1,4 +1,43 @@
 const { Client } = require('pg');
 const bcrypt = require('bycrypt');
 
-const client = new Client({})
+const client = new Client({ database: 'bookconnection' });
+client.connect();
+
+const selectBooks = (callback) => {
+  client.query('SELECT * FROM books LIMIT 10', (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+const selectVenues = (callback) => {
+  client.query('SELECT venueID FROM events LIMIT 10',(err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+const saveBook = (callback) => {
+
+}
+
+const saveEvent = () => {
+
+}
+
+const saveVenue = () => {
+
+}
+
+
+
+
+module.exports.selectBooks = selectBooks;
+module.exports.selectVenues = selectVenues;

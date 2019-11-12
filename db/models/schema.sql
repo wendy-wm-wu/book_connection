@@ -6,9 +6,32 @@ CREATE TABLE users (
   salt VARCHAR(64)
 );
 
+DROP TABLE IF EXISTS userLists;
+CREATE TABLE userLists (
+  ID serial PRIMARY KEY,
+  listName VARCHAR(30) NOT NULL UNIQUE,
+  userID SMALLINT NOT NULL
+);
+
+CREATE INDEX userIdIndex ON userLists(userID);
+
+DROP TABLE IF EXISTS books;
+CREATE TABLE books (
+  ID serial PRIMARY KEY,
+  userID SMALLINT NOT NULL,
+  title VARCHAR(30),
+  author VARCHAR(30),
+  description VARCHAR(256),
+  averageRating SMALLINT,
+  image text
+);
+
+CREATE INDEX booksByUserID ON books(userID);
+
 DROP TABLE IF EXISTS NYTbooks;
 CREATE TABLE NYTbooks (
   ID serial PRIMARY KEY,
+  userID SMALLINT NOT NULL,
   rank SMALLINT,
   weeksOnList SMALLINT,
   isbn SMALLINT,
@@ -27,16 +50,6 @@ CREATE TABLE events (
   end VARCHAR(30)
 );
 
-DROP TABLE IF EXISTS books;
-CREATE TABLE books (
-  ID serial PRIMARY KEY,
-  title VARCHAR(30),
-  author VARCHAR(30),
-  description VARCHAR(256),
-  averageRating SMALLINT,
-  image text
-);
-
 DROP TABLE IF EXISTS venues;
 CREATE TABLE venues (
   ID serial PRIMARY KEY,
@@ -44,6 +57,8 @@ CREATE TABLE venues (
   latitude SMALLINT NOT NULL,
   longitude SMALLINT NOT NULL
 );
+
+
 
 
 
