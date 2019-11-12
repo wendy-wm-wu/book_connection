@@ -6,7 +6,6 @@ const axios = require('axios');
 const config = require('./api.config.js');
 const db = require('./controllers/index.js');
 const passport = require('passport');
-const bcrypt = require('bcrypt');
 
 const app = express();
 
