@@ -24,8 +24,9 @@ const selectVenues = (callback) => {
   });
 };
 
-const saveBook = (callback) => {
-
+const saveBook = (userID, book, callback) => {
+  // const { title, author, description, image } = book;
+  // const query = 
 }
 
 const saveEvent = () => {

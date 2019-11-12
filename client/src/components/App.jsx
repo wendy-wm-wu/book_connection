@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NavBar from './NavBar.jsx';
-import User from './Home.jsx';
 import Home from './Home.jsx';
+import Events from './Events.jsx';
 import Login from './Login.jsx';
 import Logout from './Logout.jsx';
 import Signup from './Signup.jsx';
@@ -15,10 +15,10 @@ export default function App() {
         <NavBar />
         <Switch>
           {/* <Route path = '/' exact component = { Home } /> */}
+          <Route path = '/events' component = { Events } />
           <Route path = '/login' component = { Login } />
           <Route path = '/signup' component = { Signup } />
           <Route path = '/logout' component = { Logout } />
-          <Route path = '/user' component = { User } />
         </Switch>
       </div>
     </Router>

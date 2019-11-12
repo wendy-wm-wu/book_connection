@@ -11,7 +11,7 @@ const Nav = styled.nav`
   justify-content: space-around;
   align-items: center;
   min-height: 8vh;
-  background: #85BDBF;
+  background: #e8f4f8 ;
   font-family: sans-serif;
   color: white;
   z-index: 2;
@@ -25,11 +25,19 @@ const List = styled.ul`
   list-style: none;
 `;
 
+const Logo = styled.img`
+  position: inline-block;
+  top: 0%;
+  height: 70px;
+  padding: 2px;
+  margin: 5px;
+`;
+
 const NavBar = () => {
 
   const [ user, setUser ] = useState('');
   const navStyle = {
-    color: 'white',
+    color: '#002366',
     textDecoration: 'none',
   }
 
@@ -46,11 +54,14 @@ const NavBar = () => {
 
   return (
     <Nav>
-      <h3>Book Connection</h3>
+      <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/bookconnectionlogo.png`} />
       <List>
         <Link style={navStyle} to="/" >
           <li>Home</li>
         </Link> 
+        <Link style={navStyle} to="/events">
+          <li>Events</li>
+        </Link>
         <Link style={navStyle} to="/login">
           <li>Log-in</li>
         </Link>
