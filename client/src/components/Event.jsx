@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Component } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
+import { Card, Card.Img, Card.Title, Card.Text, Button } from 'react-bootstrap';
 
 const Name = styled.div`
   color: #2b90d9;
@@ -25,7 +26,7 @@ const ReadMore = styled.span`
   font-size: 13px;
 `;
 
-class Event extends React.Component{
+class Event extends Component{
   constructor(props) {
     super(props);
 

@@ -30,8 +30,20 @@ app.get('/api/books/:query', (req, res) => {
     });
 });
 
+app.get('/api/events/:params', (req, res) => {
+  const { params } = req.params;
+  const url = `https://www.eventbriteapi.com/v3/events/search?location.address=${params}&q=books&token=${config.EVENTBRITE_KEY}`;
+  axios.get(url)
+    .then((results) => {
+      console.log(results.data.events);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 app.get('/api/venues/:id', (req, res) => {
-  let { id } = req.params;
+  const { id } = req.params;
   selectVenues(id, (req, data) => {
     if (err) {
       res.sendStatus(500);

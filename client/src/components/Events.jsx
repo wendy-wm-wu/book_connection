@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container } from 'react-bootstrap';
 import axios from 'axios';
 import Search from './Search.jsx';
 import EventsList from './EventsList.jsx';
@@ -20,6 +21,7 @@ const asideStyle = {
 };
 const footerStyle = { gridArea: 'footer' };
 
+
 class Events extends Component {
   constructor(props) {
     super(props);
@@ -35,12 +37,8 @@ class Events extends Component {
     this.fetchEvents = this.fetchEvents.bind(this);
   }
 
-  componentDidMount() {
-    this.fetchEvents();
-  }
-
-  fetchEvents() {
-    axios.get('/api/events')
+  fetchEvents(query) {
+    axios.get(`/api/events/${query}`)
       .then((res) => {
         console.log(res);
       })
@@ -62,11 +60,12 @@ class Events extends Component {
   };
 
   render () {
-
+    console.log('rendering events component');
     return (
       <Container style={wrapperStyle}>
         <header style={headerStyle}/>
-        <section style={mainstyle}>
+        <section style={mainStyle}>
+        <Search fetchEvents={this.fetchEvents} />
           <EventsList 
           events={this.state.events}
           venues={this.state.venues}
@@ -75,13 +74,14 @@ class Events extends Component {
           />
         </section>
         <aside style={asideStyle}>
-          <MapContainer />
+          {/* <MapContainer /> */}
         </aside>
         <footer style={footerStyle} />
       </Container>
     );
   }
 }
+
 
 export default Events; 
 

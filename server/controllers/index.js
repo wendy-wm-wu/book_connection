@@ -24,21 +24,20 @@ const selectVenues = (id, callback) => {
   });
 };
 
-const saveVenue = () => {
+// const saveVenue = () => {
 
-}
+// }
 
-const saveBook = (userID, book, callback) => {
-  // const { title, author, description, image } = book;
-  // const query = 
-};
+// const saveBook = (userID, book, callback) => {
+//   // const { title, author, description, image } = book;
+//   // const query = 
+// };
 
-const saveEvent = () => {
+// const saveEvent = () => {
 
-};
+// };
 
 
 module.exports.selectBooks = selectBooks;
 module.exports.selectVenues = selectVenues;
-module.exports.saveVenue = saveVenue;
 

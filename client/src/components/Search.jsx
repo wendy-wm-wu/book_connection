@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, InputGroup, FormControl } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class Search extends Component {
   constructor(props) {
@@ -11,29 +11,24 @@ class Search extends Component {
   }
 
   render() {
-    const { bookQuery } = this.props;
-    const { input } = this.state;
+    const { bookQuery, fetchEvents } = this.props;
+    const { input, city } = this.state;
     return (
       <div>
         <br />
         <br />
         <br />
         <br />
-        <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1"></InputGroup.Text>
-          </InputGroup.Prepend>
-          <FormControl
-            placeholder="Search..."
-            aria-describedby="basic-addon1"
-            onChange={(event) => {
-              this.setState({
-                input: event.target.value
-              });
-            }}
-          />
-        </InputGroup>
-        <Button variant="primary" onClick={() => bookQuery(input)}>Search</Button>
+        <input type="text" 
+               placeholder="Search books..." 
+               onChange={(e) => { this.setState({ input : e.target.value}); }}
+        />
+        <Button variant="primary" onClick={() => bookQuery(input)}>Search Books</Button>
+        <input type="text" 
+               placeholder="Search events near you"
+               onChange={(e) => { this.setState({ city: e.target.value}); }}
+        />   
+        <Button variant="primary" onClick={() => fetchEvents(city)}>Search Events</Button>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Search from './Search.jsx';
+// import Search from './Search.jsx';
 import BooksList from './BooksList.jsx';
 import axios from 'axios';
 
@@ -49,7 +49,7 @@ class Home extends Component {
     return (
       <div>
         <br />
-      <Search bookQuery={this.bookQuery} />
+      {/* <Search bookQuery={this.bookQuery} /> */}
       <br/>
       <BooksList books={this.state.newBooks} />
     </div>
