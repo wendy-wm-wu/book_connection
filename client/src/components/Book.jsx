@@ -1,31 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-
-const Title = styled.div`
-  color: #2b90d9;
-  line-height: 1.4;
-  font-size: 16px;
-  font-family: 'Open Sans', sans-serif;
-`;
-
-const Author = styled.div`
-  color: #282c37;
-  font-size: 14px;
-  font-family: 'Open Sans', sans-serif;
-`;
+import { Card, Button } from 'react-bootstrap';
 
 const Description = styled.div`
   color: #282c37;
-`;
-
-const Image = styled.img`
-  display: block;
-  margin-left: 23%;
-  padding: 1em;
-  width: 150px;
-  -webkit-transform: translateY(-30px);
-          transform: translateY(-30px);
-  
 `;
 
 const Wrapper = styled.section`
@@ -40,7 +18,7 @@ const ReadMore = styled.span`
   font-size: 13px;
 `;
 
-class Book extends React.Component{
+class Book extends Component {
   constructor(props) {
     super(props);
 
@@ -61,7 +39,7 @@ class Book extends React.Component{
         description = (
           <span>
             <span>
-              {this.props.description.slice(0, 200)} ...
+              {this.props.description.slice(0, 100)} ...
             </span>
               <ReadMore onClick={this.expandText}>Read more</ReadMore>
           </span>
@@ -74,13 +52,21 @@ class Book extends React.Component{
 
     return (
     <div>
-      <Image src={`${this.props.image}`} />
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" style={{ width: '150px', height: '200px', marginLeft: 'auto', marginRight: 'auto' }} src={`${this.props.image}`} />
+        <Card.Body>
+          <Card.Title>{this.props.title}</Card.Title>
+          <Card.Text>{description}</Card.Text>
+          <Button variant="primary">Save Book</Button>
+        </Card.Body>
+      </Card>
+      {/* <Image src={`${this.props.image}`} />
       <Wrapper>
       <Title>{this.props.title}</Title>
       <Author>By {this.props.author}</Author>
       <br/>
       {description}
-      </Wrapper>
+      </Wrapper> */}
     </div>
     );
   }

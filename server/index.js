@@ -30,9 +30,10 @@ app.get('/api/books/:query', (req, res) => {
     });
 });
 
-app.get('/api/events/:params', (req, res) => {
-  const { params } = req.params;
-  const url = `https://www.eventbriteapi.com/v3/events/search?location.address=${params}&q=books&token=${config.EVENTBRITE_KEY}`;
+app.get('/api/events/:city', (req, res) => {
+  const { city } = req.params;
+  console.log(city);
+  const url = `https://www.eventbriteapi.com/v3/events/search?location.address=${city}&q=books&token=${config.EVENTBRITE_KEY}`;
   axios.get(url)
     .then((results) => {
       console.log(results.data.events);

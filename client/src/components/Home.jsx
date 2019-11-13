@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Search from './Search.jsx';
+import Search from './Search.jsx';
 import BooksList from './BooksList.jsx';
 import axios from 'axios';
 
@@ -20,7 +20,10 @@ class Home extends Component {
   bookQuery(query) {
     axios.get(`/api/books/${query}`)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        this.setState({
+          books: res.data,
+        });
       })
       .catch((err) => {
         console.log('err', err);
@@ -49,9 +52,9 @@ class Home extends Component {
     return (
       <div>
         <br />
-      {/* <Search bookQuery={this.bookQuery} /> */}
+      <Search bookQuery={this.bookQuery} />
       <br/>
-      <BooksList books={this.state.newBooks} />
+      <BooksList books={this.state.books} />
     </div>
     );
   }

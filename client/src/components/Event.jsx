@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
-import { Card, Card.Img, Card.Title, Card.Text, Button } from 'react-bootstrap';
 
 const Name = styled.div`
   color: #2b90d9;

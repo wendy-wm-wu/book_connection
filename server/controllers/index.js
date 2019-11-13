@@ -14,6 +14,17 @@ const selectBooks = (callback) => {
   });
 };
 
+const saveBooks = (books, callback) => {
+  const { title, author, description, image } = books;
+  client.query(`INSERT INTO books (title, author, description, image) VALUES (${title}, ${author}, ${description}, ${image})`, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
 const selectVenues = (id, callback) => {
   client.query(`SELECT * FROM venues WHERE venueID = ${id} LIMIT 10`, (err, results) => {
     if (err) {
@@ -28,10 +39,6 @@ const selectVenues = (id, callback) => {
 
 // }
 
-// const saveBook = (userID, book, callback) => {
-//   // const { title, author, description, image } = book;
-//   // const query = 
-// };
 
 // const saveEvent = () => {
 
@@ -40,4 +47,5 @@ const selectVenues = (id, callback) => {
 
 module.exports.selectBooks = selectBooks;
 module.exports.selectVenues = selectVenues;
+module.exports.saveBooks = saveBooks;
 
