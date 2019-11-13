@@ -14,7 +14,7 @@ export default function App() {
       <div>
         <NavBar />
         <Switch>
-          {/* <Route path = '/' exact component = { Home } /> */}
+          <Route path = '/' exact component = { Home } />
           <Route path = '/events' component = { Events } />
           <Route path = '/login' component = { Login } />
           <Route path = '/signup' component = { Signup } />

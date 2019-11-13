@@ -38,6 +38,7 @@ const NavBar = () => {
   const [ user, setUser ] = useState('');
   const navStyle = {
     color: '#002366',
+    fontWeight: 'bold',
     textDecoration: 'none',
   }
 

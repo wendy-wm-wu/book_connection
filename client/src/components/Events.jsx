@@ -1,45 +1,24 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Search from './Search.jsx';
 import EventsList from './EventsList.jsx';
 import MapContainer from './MapContainer.jsx';
-import styled from 'styled-components';
 
-const Logo = styled.img`
-  position: in-line block;
-  top: 0%;
-  left: 20%;
-  height: 100px;
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-flow: column;
-  top: 15%;
-  flex-wrap: no wrap;
-`;
-
-const ContainerWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 53%;
-  margin-left: 2%;
-`;
-
-const MapWrapper = styled.div`
-  position: fixed;
-  margin-left: 53%;
-  width: 100%;
-  height: 100%;
-  z-index: 99;
-`;
-
-const EventsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-flow: column;
-  flex-wrap: wrap;
-`;
+const wrapperStyle = {
+  display: 'grid',
+  gridTemplateColumns: '560px auto',
+  gridTemplateAreas: `
+                    'header header'
+                    'main aside'
+                    'footer footer'
+                    `,
+};
+const headerStyle = { gridArea: 'header' };
+const mainStyle = { gridArea: 'main' };
+const asideStyle = {
+  gridArea: 'aside', position: 'fixed', top: '10px', left: '580px',
+};
+const footerStyle = { gridArea: 'footer' };
 
 class Events extends Component {
   constructor(props) {
@@ -47,71 +26,59 @@ class Events extends Component {
     this.state = { 
       venues: [],
       events: [],
+      searchLat: 37.780684,
+      searchLng: -122.408986,
+      hoveredEvent: { id: null },
     }
-    this.searchEvents = this.searchEvents.bind(this);
+    this.eventMouseEnter = this.eventMouseEnter.bind(this);
+    this.eventMouseLeave = this.eventMouseLeave.bind(this);
     this.fetchEvents = this.fetchEvents.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.fetchBooks();
-  // }
-
-  searchEvents(city) {
-    $.ajax({
-      url: '/api/events',
-      type: 'POST',
-      data: {
-        city: city,
-      },
-      success: (data) => {
-        console.log('successfully added to database', data);
-        this.setState({
-          events: data,
-        });
-        this.fetchEvents();
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+  componentDidMount() {
+    this.fetchEvents();
   }
 
-  fetchEvents(city) {
-    $.ajax({
-      url: '/api/events',
-      type: 'GET',
-      success: (data) => {
-        console.log(data);
-        this.setState({
-          venues: data,
-        });
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
+  fetchEvents() {
+    axios.get('/api/events')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  eventMouseEnter() {
+    this.setState({
+      hoveredEvent: event
     });
-  }
+  };
 
-
+  eventMouseLeave() {
+    this.setState({
+      hoveredEvent: { id: null }
+    });
+  };
 
   render () {
+
     return (
-      <div>
-      <Logo src={`https://photogalleryproject.s3.us-east-2.amazonaws.com/bookconnectionlogo.png`} />
-      <hr style={{ height: 0.5}}/>
-      <br />
-      <ContainerWrapper>
-        <SearchWrapper>
-          <Search onSearchEvents={this.searchEvents}/>
-        </SearchWrapper>
-      <MapWrapper>
-      <MapContainer venues={this.state.venues}/>
-      </MapWrapper>
-      <EventsWrapper>
-      <EventsList events={this.state.events} />
-      </EventsWrapper>
-      </ContainerWrapper>
-    </div>
+      <Container style={wrapperStyle}>
+        <header style={headerStyle}/>
+        <section style={mainstyle}>
+          <EventsList 
+          events={this.state.events}
+          venues={this.state.venues}
+          eventMouseEnter={this.eventMouseEnter}
+          eventMouseLeave={this.eventMouseLeave}
+          />
+        </section>
+        <aside style={asideStyle}>
+          <MapContainer />
+        </aside>
+        <footer style={footerStyle} />
+      </Container>
     );
   }
 }

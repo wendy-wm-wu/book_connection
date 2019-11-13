@@ -1,88 +1,41 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { Component } from 'react';
+import { Button, InputGroup, FormControl } from 'react-bootstrap';
 
-const Input = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  border-radius: 3px;
-  font: inherit;
-  width: 20%;
-  height: 2.5%
-  text-align: center;
-  top: 50%;
-`;
-
-const Button = styled.button`
-  color: white;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 2em;
-  border-radius: 3px;
-  background: #2b90d9;
-  height: 38px;
-`;
-
-const InputCity = styled.input`
-  padding: 0.5em;
-  margin: 0.5em;
-  border-radius: 3px;
-  font: inherit;
-  width: 20%;
-  height: 2.5%
-  text-align: center;
-  top: 50%;
-`;
-
-const ButtonCity = styled.button`
-  color: white;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 2em;
-  border-radius: 3px;
-  background: #2b90d9;
-  height: 38px;
-`;
-
-class Search extends React.Component {
+class Search extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      term: '',
+      input: '',
       city: '',
     }
-    this.handleChange = this.handleChange.bind(this);
-    this.handleCityChange = this.handleCityChange.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({
-      term: event.target.value,
-    });
-  }
-
-  handleCityChange(event) {
-    this.setState({
-      city: event.target.value,
-    });
-  }
-
-  searchBooks() {
-    this.props.onSearch(this.state.term);
-  }
-
-  searchCity() {
-    this.props.onSearchEvents(this.state.city);
   }
 
   render() {
+    const { bookQuery } = this.props;
+    const { input } = this.state;
     return (
       <div>
-        <Input type="search" id="book-search" value={this.state.term} onChange={this.handleChange} />
-        <Button onClick={this.searchBooks.bind(this)}>Search Books</Button>
-        <InputCity type="search" id="city-search" value={this.state.city} onChange={this.handleCityChange} />
-        <ButtonCity onClick={this.searchCity.bind(this)}>Search City</ButtonCity>
+        <br />
+        <br />
+        <br />
+        <br />
+        <InputGroup className="mb-3">
+          <InputGroup.Prepend>
+            <InputGroup.Text id="basic-addon1"></InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
+            placeholder="Search..."
+            aria-describedby="basic-addon1"
+            onChange={(event) => {
+              this.setState({
+                input: event.target.value
+              });
+            }}
+          />
+        </InputGroup>
+        <Button variant="primary" onClick={() => bookQuery(input)}>Search</Button>
       </div>
-    )
+    );
   }
 }
 
