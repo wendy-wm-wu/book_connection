@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE users (
   ID serial PRIMARY KEY,
   userID VARCHAR(40) NOT NULL UNIQUE,
-  password VARCHAR(64) NOT NULL
+  password VARCHAR(64) NOT NULL,
   salt VARCHAR(64)
 );
 
@@ -46,16 +46,24 @@ CREATE TABLE events (
   ID serial PRIMARY KEY,
   name VARCHAR(30),
   venueID SMALLINT NOT NULL UNIQUE,
-  start VARCHAR(30),
-  end VARCHAR(30)
+  startTime VARCHAR(30),
+  endTime VARCHAR(30),
+  logoID VARCHAR(30)
 );
 
 DROP TABLE IF EXISTS venues;
 CREATE TABLE venues (
   ID serial PRIMARY KEY,
   name VARCHAR(30),
+  address VARCHAR(100),
+  city VARCHAR(30),
+  region VARCHAR(30),
+  postalCode VARCHAR(10),
+  country VARCHAR(30),
   latitude SMALLINT NOT NULL,
-  longitude SMALLINT NOT NULL
+  longitude SMALLINT NOT NULL,
+  venueID VARCHAR(30),
+  capacity VARCHAR(30)
 );
 
 
