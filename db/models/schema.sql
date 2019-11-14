@@ -18,11 +18,9 @@ CREATE INDEX userIdIndex ON userLists(userID);
 DROP TABLE IF EXISTS books;
 CREATE TABLE books (
   ID serial PRIMARY KEY,
-  userID SMALLINT NOT NULL,
   title VARCHAR(30),
   author VARCHAR(30),
-  description VARCHAR(256),
-  averageRating SMALLINT,
+  description text,
   image text
 );
 
@@ -31,7 +29,7 @@ CREATE INDEX booksByUserID ON books(userID);
 DROP TABLE IF EXISTS NYTbooks;
 CREATE TABLE NYTbooks (
   ID serial PRIMARY KEY,
-  userID SMALLINT NOT NULL,
+  userID SMALLINT,
   rank SMALLINT,
   weeksOnList SMALLINT,
   isbn SMALLINT,

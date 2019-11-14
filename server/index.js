@@ -4,19 +4,29 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
 const config = require('./api.config.js');
-const { selectBooks, selectVenues, saveBooks } = require('./controllers/index.js');
+const { selectBooks, selectVenues, saveBook } = require('./controllers/index.js');
 const passport = require('passport');
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '/../../client/public')));
 app.use(express.static('./client/public'));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.get('/api/books', (req, res) => {
+  selectBooks((err, results) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.send(results);
+    }
+  });
+});
 
 app.get('/api/books/:query', (req, res) => {
   const { query } = req.params;
@@ -32,10 +42,10 @@ app.get('/api/books/:query', (req, res) => {
 
 app.post('/api/books', (req, res) => {
   const { book } = req.body;
-  console.log(book);
-  saveBooks(book, (err, results) => {
+
+  saveBook(book.volumeInfo.title, book.volumeInfo.authors[0], book.volumeInfo.description, book.volumeInfo.imageLinks.smallThumbnail, (err, results) => {
     if (err) {
-      res.sendStatus(500);
+      console.log(err);
     } else {
       res.send('Successfully added');
     }

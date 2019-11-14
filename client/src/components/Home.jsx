@@ -3,6 +3,7 @@ import Search from './Search.jsx';
 import { Container, Row } from 'react-bootstrap';
 import BooksList from './BooksList.jsx';
 import axios from 'axios';
+import FavoritesList from './FavoritesList.jsx';
 
 const wrapperStyle = {
   display: 'grid',
@@ -27,7 +28,7 @@ class Home extends Component {
     this.state = { 
       books: [],
       newBooks: [],
-      favoriteList: [],
+      favoritesList: [],
     }
     this.bookQuery = this.bookQuery.bind(this);
     this.fetchFavoriteBooks = this.fetchFavoriteBooks.bind(this);
@@ -41,7 +42,9 @@ class Home extends Component {
   fetchFavoriteBooks() {
     axios.get('/api/books')
       .then((res) => {
-        console.log(res);
+        this.setState({
+          favoritesList: res.data.rows,
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -64,10 +67,10 @@ class Home extends Component {
   saveBook(book) {
     axios.post('/api/books', {book})
       .then((res) => {
-        console.log(res);
+        console.log('success on client',res);
       })
       .catch((err) => {
-        console.log(err);
+        console.log('failure on client',err);
       });
   };
 
@@ -90,11 +93,13 @@ class Home extends Component {
   // }
 
   render () {
+    console.log(this.state.favoritesList);
     return (
       <Container style={wrapperStyle}>
         <header style={headerStyle} />
         <section style={mainStyle}>
            <BooksList books={this.state.books} saveBook={this.saveBook} />
+           <FavoritesList favoriteBooks={this.state.favoritesList}/>
         </section>
       <Search bookQuery={this.bookQuery} />
       </Container>
