@@ -1,25 +1,27 @@
 import React, { Component } from 'react';
 import Search from './Search.jsx';
-import { Container, Row } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import BooksList from './BooksList.jsx';
 import axios from 'axios';
 import FavoritesList from './FavoritesList.jsx';
+import styled from 'styled-components';
 
-const wrapperStyle = {
-  display: 'grid',
-  gridTemplateColumns: '560px auto',
-  gridTemplateAreas: `
-                    'header header'
-                    'main aside'
-                    'footer footer'
-                    `,
-};
-const headerStyle = { gridArea: 'header' };
-const mainStyle = { gridArea: 'main' };
-const asideStyle = {
-  gridArea: 'aside', position: 'fixed', top: '10px', left: '580px',
-};
-const footerStyle = { gridArea: 'footer' };
+const Input = styled.input`
+  position: fixed;
+  padding: 0.5em;
+  margin: 0.5em;
+  border-radius: 3px;
+  top: 11%;
+  left: %;
+`;
+
+const Div = styled.div`
+  margin-top: 100px;
+  position: relative;
+  text-align: center;
+  justify-content: space-around;
+`;
+
 
 
 class Home extends Component {
@@ -29,6 +31,7 @@ class Home extends Component {
       books: [],
       newBooks: [],
       favoritesList: [],
+      input: '',
     }
     this.bookQuery = this.bookQuery.bind(this);
     this.fetchFavoriteBooks = this.fetchFavoriteBooks.bind(this);
@@ -67,10 +70,10 @@ class Home extends Component {
   saveBook(book) {
     axios.post('/api/books', {book})
       .then((res) => {
-        console.log('success on client',res);
+        console.log('success on client', res);
       })
       .catch((err) => {
-        console.log('failure on client',err);
+        console.log('failure on client', err);
       });
   };
 
@@ -95,14 +98,23 @@ class Home extends Component {
   render () {
     console.log(this.state.favoritesList);
     return (
-      <Container style={wrapperStyle}>
-        <header style={headerStyle} />
-        <section style={mainStyle}>
-           <BooksList books={this.state.books} saveBook={this.saveBook} />
-           <FavoritesList favoriteBooks={this.state.favoritesList}/>
-        </section>
-      <Search bookQuery={this.bookQuery} />
-      </Container>
+      <Div>
+          {/* <Input type="text" 
+                  placeholder="Search books..." 
+                  onChange={(e) => { this.setState({ input : e.target.value}); }}
+            /> */}
+            <input type="text" 
+                  placeholder="Search books..." 
+                  onChange={(e) => { this.setState({ input : e.target.value}); }}
+            />
+            <Button onClick={() => this.bookQuery(this.state.input)}>Search Books</Button>
+            <br />
+            <br />
+              <FavoritesList favoriteBooks={this.state.favoritesList}/>
+              <BooksList books={this.state.books} saveBook={this.saveBook} />
+      </Div>
+              
+
     );
   }
 }

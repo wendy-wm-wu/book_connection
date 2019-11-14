@@ -31,10 +31,11 @@ class Events extends Component {
       searchLat: 37.780684,
       searchLng: -122.408986,
       hoveredEvent: { id: null },
+      city: '',
     }
     this.eventMouseEnter = this.eventMouseEnter.bind(this);
     this.eventMouseLeave = this.eventMouseLeave.bind(this);
-    this.fetchEvents = this.fetchEvents.bind(this);
+    // this.fetchEvents = this.fetchEvents.bind(this);
   }
 
   // fetchEvents(query) {
@@ -65,7 +66,15 @@ class Events extends Component {
       <Container style={wrapperStyle}>
         <header style={headerStyle}/>
         <section style={mainStyle}>
-        {/* <Search fetchEvents={this.fetchEvents} /> */}
+        <br />
+        <br />
+        <br />
+        <br />
+        <input type="text" 
+                  placeholder="Search events..." 
+                  onChange={(e) => { this.setState({ city : e.target.value}); }}
+            />
+        {/* <Button variant="primary" onClick={() => this.fetchEvents(this.state.city)}>Search Events</Button> */}2
           <EventsList 
           events={this.state.events}
           venues={this.state.venues}

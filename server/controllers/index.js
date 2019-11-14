@@ -42,16 +42,21 @@ const selectVenues = (id, callback) => {
   });
 };
 
-// const saveVenue = () => {
+const saveVenue = (name, address, city, region, postalCode, country, latitude, longitude, venueId, capacity, callback) => {
+  const query = `INSERT INTO venues (name, address, city, region, postalCode, country, latitude, longitude, venueId, capacity) VALUES ('${name}', '${address}', '${city}', '${region}', '${postalCode}', '${country}', ${latitude}, ${longitude}, '${venueId}', '${capacity}')`;
+  client.query(query, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
 
-// }
 
-
-// const saveEvent = () => {
-
-// };
 
 
 module.exports.selectBooks = selectBooks;
 module.exports.selectVenues = selectVenues;
 module.exports.saveBook = saveBook;
+module.exports.saveVenue = saveVenue;
