@@ -1,69 +1,72 @@
-import React, { Component } from 'react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
-import config from '../../../server/api.config.js';
+import React from 'react';
+import { withScriptjs, withGoogleMap, GoogleMap, InfoWindow } from 'react-google-maps';
+import EventMarker from './EventMarker.jsx';
+import EventEntry from './EventEntry.jsx';
 
-class MapContainer extends Component {
+const infoWindowStyle = {
+  width: '240px',
+  height: '320px',
+  margin: '0',
+  padding: '0',
+};
+
+class MapContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showingInfoWindow: false,
-      activeMarker: {},
-      selectedPlace: {},
-    }
-    this.onMarkerClick = this.onMarkerClick.bind(this);
-    this.onClose = this.onClose.bind(this);
-    this.onMapClicked = this.onMapClicked.bind(this);
-  }
-  onMarkerClick(props, marker, event) {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true,
-    });
+      currentEvent: null,
+      markerPosition: null,
+      isOpen: false,
+    };
+    this.onToggleOpen = this.onToggleOpen.bind(this);
   }
 
-  onClose(props) {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null,
-      });
-    }
-  }
-
-  onMapClicked(props) {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null,
-      });
+  onToggleOpen(event, loc) {
+    if (!loc) {
+      this.setState({ currentEvent: null });
+      this.setState({ markerPosition: null });
+      this.setState({ isOpen: false });
+    } else {
+      this.setState({ isOpen: false });
+      this.setState({ currentEvent: event });
+      this.setState({ markerPosition: { lat: loc.latLng.lat(), lng: loc.latLng.lng() } });
+      this.setState({ isOpen: true });
     }
   }
 
   render() {
-    let marker = [];
-    let infoWindow = [];
-    for (let i = 0; i < this.props.venues.length; i++) {
-        marker.push(<Marker name={`${this.props.venues[i].name}`} position={{ lat: `${this.props.venues[i].latitude}`, lng: `${this.props.venues[i].longitude}` }}  onClick={this.onMarkerClick} />);
-        infoWindow.push(<InfoWindow marker={this.state.activeMarker} visible={this.state.showingInfoWindow} onClose={this.onClose}><div><h4>{this.state.selectedPlace.name}</h4></div></InfoWindow>)
-    }
-    const style = {
-      width: '40%',
-      height: '50%',
-      position: 'fixed'
-    }
     return (
-    <div className="App">
-    <Map google={this.props.google} style={style} onClick={this.onMapClicked}>
-      {marker}
-      {infoWindow}
-    </Map>
-    </div>
+      <GoogleMap
+        defaultZoom={14} // between 0 and 18
+        defaultCenter={{ lat: this.props.searchLat, lng: this.props.searchLng }}
+        clickableIcons={false}
+      >
+        {this.props.events.map(event => (
+          <EventMarker
+            key={event.id}
+            event={event}
+            onToggleOpen={this.onToggleOpen}
+            isHovered={this.props.hoveredEvent.id === event.id}
+          />
+        ))}
+        {this.state.isOpen &&
+        <InfoWindow
+          position={this.state.markerPosition}
+          onCloseClick={this.onToggleOpen}
+        >
+          <div>
+            {this.state.currentEvent &&
+            <EventEntry
+              event={this.state.currentEvent}
+              style={infoWindowStyle}
+            />
+            }
+          </div>
+        </InfoWindow>}
+      </GoogleMap>
     );
-    }
+  }
 }
 
-export default GoogleApiWrapper({
-  apiKey: (`${config.GOOGLE_MAPS_KEY}`)
- })(MapContainer);
+export default withScriptjs(withGoogleMap(MapContainer));
 

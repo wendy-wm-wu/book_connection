@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import axios from 'axios';
-import Search from './Search.jsx';
 import EventsList from './EventsList.jsx';
 import MapContainer from './MapContainer.jsx';
 
@@ -26,7 +25,6 @@ class Events extends Component {
   constructor(props) {
     super(props);
     this.state = { 
-      venues: [],
       events: [],
       searchLat: 37.780684,
       searchLng: -122.408986,
@@ -74,7 +72,7 @@ class Events extends Component {
                   placeholder="Search events..." 
                   onChange={(e) => { this.setState({ city : e.target.value}); }}
             />
-        {/* <Button variant="primary" onClick={() => this.fetchEvents(this.state.city)}>Search Events</Button> */}2
+        {/* <Button variant="primary" onClick={() => this.fetchEvents(this.state.city)}>Search Events</Button> */}
           <EventsList 
           events={this.state.events}
           venues={this.state.venues}
@@ -83,7 +81,16 @@ class Events extends Component {
           />
         </section>
         <aside style={asideStyle}>
-          {/* <MapContainer /> */}
+        <MapContainer
+            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            loadingElement={<div style={{ height: '100%' }} />}
+            containerElement={<div style={{ height: '600px', width: '700px' }} />}
+            mapElement={<div style={{ height: '100%' }} />}
+            searchLat={this.state.searchLat}
+            searchLng={this.state.searchLng}
+            events={this.state.events}
+            hoveredEvent={this.state.hoveredEvent}
+          />
         </aside>
         <footer style={footerStyle} />
       </Container>

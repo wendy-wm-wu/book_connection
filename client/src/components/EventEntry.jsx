@@ -25,7 +25,7 @@ const ReadMore = styled.span`
   font-size: 13px;
 `;
 
-class Event extends Component{
+class EventEntry extends Component{
   constructor(props) {
     super(props);
 
@@ -74,4 +74,4 @@ class Event extends Component{
 }
 
 
-export default Event;
+export default EventEntry;
