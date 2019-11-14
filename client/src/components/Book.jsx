@@ -33,10 +33,10 @@ class Book extends Component {
     });
   }
   render() {
-    let description = <Description>{this.props.description}</Description>;
+    let expandedDescription = <Description>{this.props.description}</Description>;
     if (this.props.description) {
       if (this.props.description.length > 100 && this.props.description.length) {
-        description = (
+        expandedDescription = (
           <span>
             <span>
               {this.props.description.slice(0, 100)} ...
@@ -47,8 +47,9 @@ class Book extends Component {
       }
     }
     if (this.state.expanded) {
-      description = <Description>{this.props.description}</Description>
+      expandedDescription = <Description>{this.props.description}</Description>
     }
+    const { title, author, description, image } = this.props.book;
 
     return (
     <div>
@@ -56,8 +57,8 @@ class Book extends Component {
         <Card.Img variant="top" style={{ width: '150px', height: '200px', marginLeft: 'auto', marginRight: 'auto' }} src={`${this.props.image}`} />
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
-          <Card.Text>{description}</Card.Text>
-          <Button variant="primary">Save Book</Button>
+          <Card.Text>{expandedDescription}</Card.Text>
+          <Button variant="primary" onClick={() => this.props.saveBook(this.props.book)}>Save Book</Button>
         </Card.Body>
       </Card>
       {/* <Image src={`${this.props.image}`} />

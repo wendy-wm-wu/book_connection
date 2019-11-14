@@ -37,15 +37,15 @@ class Events extends Component {
     this.fetchEvents = this.fetchEvents.bind(this);
   }
 
-  fetchEvents(query) {
-    axios.get(`/api/events/${query}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // fetchEvents(query) {
+  //   axios.get(`/api/events/${query}`)
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   eventMouseEnter() {
     this.setState({
@@ -65,7 +65,7 @@ class Events extends Component {
       <Container style={wrapperStyle}>
         <header style={headerStyle}/>
         <section style={mainStyle}>
-        <Search fetchEvents={this.fetchEvents} />
+        {/* <Search fetchEvents={this.fetchEvents} /> */}
           <EventsList 
           events={this.state.events}
           venues={this.state.venues}

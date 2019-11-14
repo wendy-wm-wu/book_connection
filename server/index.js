@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
 const config = require('./api.config.js');
-const { selectBooks, selectVenues } = require('./controllers/index.js');
+const { selectBooks, selectVenues, saveBooks } = require('./controllers/index.js');
 const passport = require('passport');
 
 const app = express();
@@ -28,6 +28,18 @@ app.get('/api/books/:query', (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+app.post('/api/books', (req, res) => {
+  const { book } = req.body;
+  console.log(book);
+  saveBooks(book, (err, results) => {
+    if (err) {
+      res.sendStatus(500);
+    } else {
+      res.send('Successfully added');
+    }
+  });
 });
 
 app.get('/api/events/:city', (req, res) => {

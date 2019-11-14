@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 import Search from './Search.jsx';
+import { Container, Row } from 'react-bootstrap';
 import BooksList from './BooksList.jsx';
 import axios from 'axios';
+
+const wrapperStyle = {
+  display: 'grid',
+  gridTemplateColumns: '560px auto',
+  gridTemplateAreas: `
+                    'header header'
+                    'main aside'
+                    'footer footer'
+                    `,
+};
+const headerStyle = { gridArea: 'header' };
+const mainStyle = { gridArea: 'main' };
+const asideStyle = {
+  gridArea: 'aside', position: 'fixed', top: '10px', left: '580px',
+};
+const footerStyle = { gridArea: 'footer' };
+
 
 class Home extends Component {
   constructor(props) {
@@ -9,13 +27,26 @@ class Home extends Component {
     this.state = { 
       books: [],
       newBooks: [],
+      favoriteList: [],
     }
     this.bookQuery = this.bookQuery.bind(this);
+    this.fetchFavoriteBooks = this.fetchFavoriteBooks.bind(this);
+    this.saveBook = this.saveBook.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.fetchBooks();
-  // }
+  componentDidMount() {
+    this.fetchFavoriteBooks();
+  }
+
+  fetchFavoriteBooks() {
+    axios.get('/api/books')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   
   bookQuery(query) {
     axios.get(`/api/books/${query}`)
@@ -27,6 +58,16 @@ class Home extends Component {
       })
       .catch((err) => {
         console.log('err', err);
+      });
+  };
+
+  saveBook(book) {
+    axios.post('/api/books', {book})
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -50,12 +91,13 @@ class Home extends Component {
 
   render () {
     return (
-      <div>
-        <br />
+      <Container style={wrapperStyle}>
+        <header style={headerStyle} />
+        <section style={mainStyle}>
+           <BooksList books={this.state.books} saveBook={this.saveBook} />
+        </section>
       <Search bookQuery={this.bookQuery} />
-      <br/>
-      <BooksList books={this.state.books} />
-    </div>
+      </Container>
     );
   }
 }

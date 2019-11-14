@@ -1,7 +1,7 @@
 # Book Connection
-<p align='center'>
+<!-- <p align='center'>
   <img src="https://github.com/wendy-wm-wu/book_connection/blob/master/book-connection-demo.gif" width="700px" align="center"/>
-</p>   
+</p>    -->
 
 > Book Connection allows the user to track and search books with keywords and find local book-releated events by location. 
 
