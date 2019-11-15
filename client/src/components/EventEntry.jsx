@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
+import { Card } from 'react-bootstrap';
 
 const Name = styled.div`
   color: #2b90d9;
@@ -58,16 +59,25 @@ class EventEntry extends Component{
     }
     return (
     <div>
-      <Wrapper>
+      {/* <Wrapper>
       <Name>{this.props.name}</Name>
       <br />
-      {`${moment(this.props.start).format('ddd, MMM Do, YYYY, h:mm A')} -
-        ${moment(this.props.end).format('ddd, MMM Do, YYYY, h:mm A')}
-     `}
       <br/>
       <br />
       {description}
-      </Wrapper>
+      </Wrapper> */}
+      <Card style={{ width: '18rem' }}>
+        <Card.Img variant="top" style={{ width: '250px', height: '200px', marginLeft: 'auto', marginRight: 'auto' }} src={`${this.props.image}`} />
+        <Card.Body>
+          <Card.Title>{this.props.name}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">   
+          {`${moment(this.props.start).format('ddd, MMM Do, YYYY, h:mm A')} -
+            ${moment(this.props.end).format('ddd, MMM Do, YYYY, h:mm A')}
+          `}
+          </Card.Subtitle>
+          <Card.Text>{description}</Card.Text>
+        </Card.Body>
+      </Card>
     </div>
     );
   }

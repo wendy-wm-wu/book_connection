@@ -2,11 +2,12 @@ import React from 'react';
 import EventEntry from './EventEntry.jsx';
 
 const EventsList = (props) => {
-  console.log(props);
+  console.log('rendering eventslist');
+  const { events } = props;
   return (
     <div className="events-list">
-      {props.events.map((event, index) => {
-        return <EventEntry event={event} index={index} name={event.name.text} start={event.start.local} end={event.end.local} description={event.description.text} />
+      { events.map((event, index) => {
+        return <EventEntry event={event} key={event.id} name={event.name} description={event.description} venueID={event.venueid} start={event.starttime} end={event.endtime} image={event.image} />
       })}
     </div>
   );

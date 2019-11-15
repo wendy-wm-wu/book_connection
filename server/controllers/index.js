@@ -52,6 +52,16 @@ const saveVenue = (name, address, city, region, postalCode, country, latitude, l
   });
 };
 
+const selectEvents = (callback) => {
+  client.query('SELECT * FROM events LIMIT 10', (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
 const saveEvent = (name, description, venueID, startTime, endTime, image, callback) => {
   const query = `INSERT INTO events (name, description, venueID, startTime, endTime, image) VALUES ('${name}', '${description}', ${venueID}, '${startTime}', '${endTime}', '${image}')`;
   client.query(query, (err, results) => {
@@ -68,3 +78,4 @@ module.exports.selectVenues = selectVenues;
 module.exports.saveBook = saveBook;
 module.exports.saveVenue = saveVenue;
 module.exports.saveEvent = saveEvent;
+module.exports.selectEvents = selectEvents;

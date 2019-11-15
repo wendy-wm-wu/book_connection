@@ -44,9 +44,9 @@ class Events extends Component {
   fetchEvents() {
     axios.get('/api/events')
       .then((res) => {
-        console.log('success', res);
+        console.log('success', res.data.rows);
         this.setState({
-          events: res,
+          events: res.data.rows,
         })
       })
       .catch((err) => {
@@ -77,6 +77,7 @@ class Events extends Component {
   };
 
   render () {
+    console.log('events',this.state.events);
     return (
       <Container style={wrapperStyle}>
         <header style={headerStyle}/>
@@ -94,7 +95,6 @@ class Events extends Component {
           </Button>
             <EventsList 
               events={this.state.events}
-              venues={this.state.venues}
               eventMouseEnter={this.eventMouseEnter}
               eventMouseLeave={this.eventMouseLeave}
             />

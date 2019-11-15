@@ -57,6 +57,7 @@ class FavoriteBook extends Component {
         <Card.Img variant="top" style={{ width: '150px', height: '200px', marginLeft: 'auto', marginRight: 'auto' }} src={`${this.props.image}`} />
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">{this.props.author}</Card.Subtitle>
           <Card.Text>{expandedDescription}</Card.Text>
           <Button variant="primary" onClick={() => this.props.saveBook(this.props.book)}>Save Book</Button>
         </Card.Body>
