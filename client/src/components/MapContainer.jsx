@@ -35,6 +35,7 @@ class MapContainer extends React.Component {
   }
 
   render() {
+    console.log('mapcontainer', this.props.events);
     return (
       <GoogleMap
         defaultZoom={14} // between 0 and 18
@@ -69,4 +70,6 @@ class MapContainer extends React.Component {
 }
 
 export default withScriptjs(withGoogleMap(MapContainer));
+
+
 
