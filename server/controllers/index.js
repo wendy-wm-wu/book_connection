@@ -1,6 +1,6 @@
-const { Pool } = require('pg');
+const { Client } = require('pg');
 
-const client = new Pool({ database: 'bookconnection' });
+const client = new Client({ database: 'bookconnection' });
 
 client.connect(err => {
   if (err) {
@@ -22,7 +22,6 @@ const selectBooks = (callback) => {
 
 const saveBook = (title, author, description, image, callback) => {
   const query = `INSERT INTO books (title, author, description, image) VALUES ('${title}','${author}','${description}','${image}')`;
-  console.log(query);
   client.query(query, (err, results) => {
     if (err) {
       callback(err, null);
@@ -53,10 +52,19 @@ const saveVenue = (name, address, city, region, postalCode, country, latitude, l
   });
 };
 
-
-
+const saveEvent = (name, description, venueID, startTime, endTime, image, callback) => {
+  const query = `INSERT INTO events (name, description, venueID, startTime, endTime, image) VALUES ('${name}', '${description}', ${venueID}, '${startTime}', '${endTime}', '${image}')`;
+  client.query(query, (err, results) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
 
 module.exports.selectBooks = selectBooks;
 module.exports.selectVenues = selectVenues;
 module.exports.saveBook = saveBook;
 module.exports.saveVenue = saveVenue;
+module.exports.saveEvent = saveEvent;

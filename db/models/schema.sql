@@ -24,7 +24,7 @@ CREATE TABLE books (
   image text
 );
 
-CREATE INDEX booksByUserID ON books(userID);
+-- CREATE INDEX booksByUserID ON books(userID);
 
 DROP TABLE IF EXISTS NYTbooks;
 CREATE TABLE NYTbooks (
@@ -43,10 +43,11 @@ DROP TABLE IF EXISTS events;
 CREATE TABLE events (
   ID serial PRIMARY KEY,
   name VARCHAR(30),
+  description text,
   venueID SMALLINT NOT NULL UNIQUE,
   startTime VARCHAR(30),
   endTime VARCHAR(30),
-  logoID VARCHAR(30)
+  image text
 );
 
 DROP TABLE IF EXISTS venues;

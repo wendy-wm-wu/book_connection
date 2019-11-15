@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Search from './Search.jsx';
 import { Button } from 'react-bootstrap';
 import BooksList from './BooksList.jsx';
 import axios from 'axios';
@@ -21,8 +20,6 @@ const Div = styled.div`
   text-align: center;
   justify-content: space-around;
 `;
-
-
 
 class Home extends Component {
   constructor(props) {
@@ -77,32 +74,10 @@ class Home extends Component {
       });
   };
 
-
-  // searchBooks(searchedTerm) {
-  //   $.ajax({
-  //     url: '/api/books',
-  //     type: 'POST',
-  //     data: {
-  //       title: searchedTerm,
-  //     },
-  //     success: (data) => {
-  //       console.log('successfully added to database', data);
-  //       this.fetchBooks();
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-  // }
-
   render () {
     console.log(this.state.favoritesList);
     return (
       <Div>
-          {/* <Input type="text" 
-                  placeholder="Search books..." 
-                  onChange={(e) => { this.setState({ input : e.target.value}); }}
-            /> */}
             <input type="text" 
                   placeholder="Search books..." 
                   onChange={(e) => { this.setState({ input : e.target.value}); }}
@@ -113,8 +88,6 @@ class Home extends Component {
               <FavoritesList favoriteBooks={this.state.favoritesList}/>
               <BooksList books={this.state.books} saveBook={this.saveBook} />
       </Div>
-              
-
     );
   }
 }

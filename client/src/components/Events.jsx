@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import axios from 'axios';
 import EventsList from './EventsList.jsx';
 import MapContainer from './MapContainer.jsx';
@@ -33,18 +33,18 @@ class Events extends Component {
     }
     this.eventMouseEnter = this.eventMouseEnter.bind(this);
     this.eventMouseLeave = this.eventMouseLeave.bind(this);
-    // this.fetchEvents = this.fetchEvents.bind(this);
+    this.fetchEvents = this.fetchEvents.bind(this);
   }
 
-  // fetchEvents(query) {
-  //   axios.get(`/api/events/${query}`)
-  //     .then((res) => {
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  fetchEvents(query) {
+    axios.get(`/api/events/${query}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   eventMouseEnter() {
     this.setState({
@@ -59,7 +59,6 @@ class Events extends Component {
   };
 
   render () {
-    console.log('rendering events component');
     return (
       <Container style={wrapperStyle}>
         <header style={headerStyle}/>
@@ -68,28 +67,30 @@ class Events extends Component {
         <br />
         <br />
         <br />
-        <input type="text" 
-                  placeholder="Search events..." 
-                  onChange={(e) => { this.setState({ city : e.target.value}); }}
-            />
-        {/* <Button variant="primary" onClick={() => this.fetchEvents(this.state.city)}>Search Events</Button> */}
-          <EventsList 
-          events={this.state.events}
-          venues={this.state.venues}
-          eventMouseEnter={this.eventMouseEnter}
-          eventMouseLeave={this.eventMouseLeave}
+          <input type="text" 
+                placeholder="Search events..." 
+                onChange={(e) => { this.setState({ city : e.target.value }); }}
           />
+          <Button variant="primary" 
+                  onClick={() => this.fetchEvents(this.state.city)}>Search Events 
+          </Button>
+            <EventsList 
+              events={this.state.events}
+              venues={this.state.venues}
+              eventMouseEnter={this.eventMouseEnter}
+              eventMouseLeave={this.eventMouseLeave}
+            />
         </section>
         <aside style={asideStyle}>
-        <MapContainer
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: '100%' }} />}
-            containerElement={<div style={{ height: '600px', width: '700px' }} />}
-            mapElement={<div style={{ height: '100%' }} />}
-            searchLat={this.state.searchLat}
-            searchLng={this.state.searchLng}
-            events={this.state.events}
-            hoveredEvent={this.state.hoveredEvent}
+          <MapContainer
+              googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+              loadingElement={<div style={{ height: '100%' }} />}
+              containerElement={<div style={{ height: '600px', width: '700px' }} />}
+              mapElement={<div style={{ height: '100%' }} />}
+              searchLat={this.state.searchLat}
+              searchLng={this.state.searchLng}
+              events={this.state.events}
+              hoveredEvent={this.state.hoveredEvent}
           />
         </aside>
         <footer style={footerStyle} />
