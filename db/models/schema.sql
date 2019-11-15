@@ -44,7 +44,7 @@ CREATE TABLE events (
   ID serial PRIMARY KEY,
   name VARCHAR(30),
   description text,
-  venueID SMALLINT NOT NULL UNIQUE,
+  venueID INT NOT NULL UNIQUE,
   startTime VARCHAR(30),
   endTime VARCHAR(30),
   image text

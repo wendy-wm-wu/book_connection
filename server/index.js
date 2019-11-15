@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
 const config = require('./api.config.js');
-const { selectBooks, selectVenues, saveBook } = require('./controllers/index.js');
+const { selectBooks, selectVenues, saveBook, saveEvent } = require('./controllers/index.js');
 const passport = require('passport');
 
 const app = express();
@@ -57,7 +57,18 @@ app.get('/api/events/:query', (req, res) => {
   const url = `https://www.eventbriteapi.com/v3/events/search/?location.address=${query}&q=books&token=${config.EVENTBRITE_KEY}`;
   axios.get(url)
     .then((results) => {
-      console.log(results.events);
+      console.log('results', results.events);
+      results.events.forEach((event) => {
+        if (event.logo.url !== undefined) {
+          saveEvent(event.name, event.summary, event.venue_id, event.start.local, event.end.local, event.logo.url, (err, data) => {
+            if (err) {
+              res.sendStatus(500);
+            } else {
+              res.send(data);
+            }
+          });
+        }
+      });
     })
     .catch((err) => {
       console.log(err);

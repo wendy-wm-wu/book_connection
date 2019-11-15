@@ -33,10 +33,28 @@ class Events extends Component {
     }
     this.eventMouseEnter = this.eventMouseEnter.bind(this);
     this.eventMouseLeave = this.eventMouseLeave.bind(this);
+    this.eventsQuery = this.eventsQuery.bind(this);
     this.fetchEvents = this.fetchEvents.bind(this);
   }
 
-  fetchEvents(query) {
+  componentDidMount() {
+    this.fetchEvents();
+  }
+
+  fetchEvents() {
+    axios.get('/api/events')
+      .then((res) => {
+        console.log('success', res);
+        this.setState({
+          events: res,
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  eventsQuery(query) {
     axios.get(`/api/events/${query}`)
       .then((res) => {
         console.log(res);
@@ -72,7 +90,7 @@ class Events extends Component {
                 onChange={(e) => { this.setState({ city : e.target.value }); }}
           />
           <Button variant="primary" 
-                  onClick={() => this.fetchEvents(this.state.city)}>Search Events 
+                  onClick={() => this.eventsQuery(this.state.city)}>Search Events 
           </Button>
             <EventsList 
               events={this.state.events}
@@ -98,7 +116,6 @@ class Events extends Component {
     );
   }
 }
-
 
 export default Events; 
 
