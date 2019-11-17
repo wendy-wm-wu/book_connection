@@ -23,5 +23,5 @@ npm run react-dev
 ## Requirements
 
 - Node 
-- MongoDB
-- Mongoose
+- PostgreSQL
+- PG

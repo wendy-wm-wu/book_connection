@@ -64,7 +64,7 @@ app.get('/api/events', (req, res) => {
 app.get('/api/events/:query', (req, res) => {
   const { query } = req.params;
   console.log(query);
-  const url = `https://www.eventbriteapi.com/v3/events/search/?location.address=${query}&q=books&token=${config.EVENTBRITE_KEY}`;
+  const url = `https://www.eventbriteapi.com/v3/events/search/?q=books&token=OF6OTT6L57PKLFFLVRE4`;
   axios.get(url)
     .then((results) => {
       console.log('results', results.events);
