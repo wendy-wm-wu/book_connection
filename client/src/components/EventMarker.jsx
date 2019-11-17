@@ -23,17 +23,13 @@ class EventMarker extends Component {
   // }
 
   render() {
+    console.log('rendering marker');
     return (
       // this.state.venue && 
       <Marker 
-        icon={this.props.isHovered ? '': ''}
+        icon={this.props.isHovered ? 'https://photogalleryproject.s3.us-east-2.amazonaws.com/googlemapspin.jpg' : ''}
         onClick={(e) => this.props.onToggleOpen(this.props.event, e)}
-        position={{
-          // lat: Number(this.state.venue.address.latitude),
-          // lng: Number(this.state.venue.address.longitude),
-          lat: 37.7514,
-          lng: 122.4309,
-        }}
+        position={{ lat: 37.778519, lng: -122.405640 }}
       />
     );
   }

@@ -67,13 +67,13 @@ class Events extends Component {
 
   eventMouseEnter() {
     this.setState({
-      hoveredEvent: event
+      hoveredEvent: event,
     });
   };
 
   eventMouseLeave() {
     this.setState({
-      hoveredEvent: { id: null }
+      hoveredEvent: { id: null },
     });
   };
 
