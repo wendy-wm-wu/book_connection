@@ -18,10 +18,11 @@ CREATE INDEX userIdIndex ON userLists(userID);
 DROP TABLE IF EXISTS books;
 CREATE TABLE books (
   ID serial PRIMARY KEY,
-  title VARCHAR(30),
+  title VARCHAR(255),
   author VARCHAR(30),
   description text,
-  image text
+  image text,
+  readBook boolean
 );
 
 -- CREATE INDEX booksByUserID ON books(userID);

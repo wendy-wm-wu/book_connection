@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
 const config = require('./api.config.js');
-const { selectBooks, selectVenues, saveBook, saveEvent, selectEvents } = require('./controllers/index.js');
+const { selectBooks, selectVenues, saveBook, saveEvent, selectEvents, changeReadStatus } = require('./controllers/index.js');
 const passport = require('passport');
 
 const app = express();
@@ -47,6 +47,18 @@ app.post('/api/books', (req, res) => {
       console.log(err);
     } else {
       res.send('Successfully added');
+    }
+  });
+});
+
+//TODO: find book in database with the id and change readBook to true and send status code to client 
+app.post('/api/books/:id', (req, res) => {
+  const { id } = req.params; 
+  changeReadStatus(id, (err, results) => {
+    if (err) {
+      res.sendStatus(500); 
+    } else {
+      res.sendStatus(200);
     }
   });
 });

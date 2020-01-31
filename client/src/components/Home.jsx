@@ -33,6 +33,7 @@ class Home extends Component {
     this.bookQuery = this.bookQuery.bind(this);
     this.fetchFavoriteBooks = this.fetchFavoriteBooks.bind(this);
     this.saveBook = this.saveBook.bind(this);
+    this.readBook = this.readBook.bind(this);
   }
 
   componentDidMount() {
@@ -45,6 +46,19 @@ class Home extends Component {
         this.setState({
           favoritesList: res.data.rows,
         })
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  readBook(id) {
+    axios.post(`/api/books/${id}`)
+      .then((res) => {
+        console.log('book', res);
+      })
+      .then(() => {
+        this.fetchFavoriteBooks();
       })
       .catch((err) => {
         console.log(err);
@@ -69,6 +83,10 @@ class Home extends Component {
       .then((res) => {
         console.log('success on client', res);
       })
+      .then(() => {
+        console.log('fetchingbooks');
+        this.fetchFavoriteBooks();
+      })
       .catch((err) => {
         console.log('failure on client', err);
       });
@@ -85,7 +103,7 @@ class Home extends Component {
             <Button onClick={() => this.bookQuery(this.state.input)}>Search Books</Button>
             <br />
             <br />
-              <FavoritesList favoriteBooks={this.state.favoritesList}/>
+              <FavoritesList favoriteBooks={this.state.favoritesList} readBook={this.readBook} />
               <BooksList books={this.state.books} saveBook={this.saveBook} />
       </Div>
     );

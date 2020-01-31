@@ -32,7 +32,10 @@ class FavoriteBook extends Component {
       expanded: true,
     });
   }
+
   render() {
+    const { book } = this.props; 
+
     let expandedDescription = <Description>{this.props.description}</Description>;
     if (this.props.description) {
       if (this.props.description.length > 100 && this.props.description.length) {
@@ -51,6 +54,8 @@ class FavoriteBook extends Component {
     }
     const { title, author, description, image } = this.props.book;
 
+    //TODO: check if book is marked read and have a button to mark unread 
+
     return (
     <div>
       <Card style={{ width: '18rem' }}>
@@ -59,16 +64,9 @@ class FavoriteBook extends Component {
           <Card.Title>{this.props.title}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{this.props.author}</Card.Subtitle>
           <Card.Text>{expandedDescription}</Card.Text>
-          <Button variant="primary" onClick={() => this.props.saveBook(this.props.book)}>Save Book</Button>
+          {!book.readbook && (<Button variant="primary" onClick={() => this.props.readBook(book.id)}>Read</Button> )}
         </Card.Body>
       </Card>
-      {/* <Image src={`${this.props.image}`} />
-      <Wrapper>
-      <Title>{this.props.title}</Title>
-      <Author>By {this.props.author}</Author>
-      <br/>
-      {description}
-      </Wrapper> */}
     </div>
     );
   }

@@ -31,6 +31,17 @@ const saveBook = (title, author, description, image, callback) => {
   });
 };
 
+const changeReadStatus = (id, callback) => {
+  const query = `UPDATE books SET readBook = true WHERE id = ${id}`;
+  client.query(query, (err, results) => {
+    if (err) {
+      callback(err, null); 
+    } else {
+      callback(null, results); 
+    }
+  });
+};
+
 const selectVenues = (id, callback) => {
   client.query(`SELECT * FROM venues WHERE venueID = ${id} LIMIT 10`, (err, results) => {
     if (err) {
@@ -79,3 +90,4 @@ module.exports.saveBook = saveBook;
 module.exports.saveVenue = saveVenue;
 module.exports.saveEvent = saveEvent;
 module.exports.selectEvents = selectEvents;
+module.exports.changeReadStatus = changeReadStatus; 

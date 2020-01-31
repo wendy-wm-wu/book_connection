@@ -27,11 +27,13 @@ class Book extends Component {
     }
     this.expandText = this.expandText.bind(this);
   }
+
   expandText() {
     this.setState({
       expanded: true,
     });
   }
+
   render() {
     let expandedDescription = <Description>{this.props.description}</Description>;
     if (this.props.description) {
@@ -51,6 +53,7 @@ class Book extends Component {
     }
     const { title, author, description, image } = this.props.book;
 
+
     return (
     <div>
       <Card style={{ width: '18rem' }}>
@@ -62,13 +65,6 @@ class Book extends Component {
           <Button variant="primary" onClick={() => this.props.saveBook(this.props.book)}>Save Book</Button>
         </Card.Body>
       </Card>
-      {/* <Image src={`${this.props.image}`} />
-      <Wrapper>
-      <Title>{this.props.title}</Title>
-      <Author>By {this.props.author}</Author>
-      <br/>
-      {description}
-      </Wrapper> */}
     </div>
     );
   }
